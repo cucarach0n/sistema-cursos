@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Web</title>
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <!-- Slider -->
+  <link rel="stylesheet" href="./assets/css/owl.carousel.min.css">
+  <!-- Theme Slider -->
+  <link rel="stylesheet" href="./assets/css/owl.theme.default.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./assets/css/app.css">
+</head>
+<body>
+
+  <div class="fixed-actions">
+    <div class="container">
+      <a href="#" class="btn btn--primary btn--info">
+        Informes
+      </a>
+      <a href="#" class="btn btn--whatsapp">
+        <span>Contáctanos</span>
+        <i class="fab fa-whatsapp"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal modal--cart" id="modal-cart">
+    <div class="modal-content">
+      <button class="modal-button-close" id="close-cart-modal">&times;</button>
+      <div class="card card__body l-cart-modal">
+        <!-- Contanido modal -->
+        <div>
+          <h2>Tu carrito de compras</h2>
+          <p style="font-size: 16px !important; margin: .2rem 0 1.1rem 0;">Tienes 4 items en tu carrito</p>
+          <div class="l-cart-modal__main">
+            <div>
+              <article class="cart-item">
+                <img src="https://www.zegelvirtual.com/sites/default/files/styles/producto_carrito/public/productos/BASICO.jpg.webp?itok=4eheo5nX" alt="" class="cart-item__img">
+                <div class="cart-item__body">
+                  <h3>Excel Básico</h3>
+                  <div class="price">S/. 279.00</div>
+                  <a href="" class="cart-item__delete">
+                    <i class="fa fa-trash-alt"></i>
+                  </a>
+                </div>
+              </article>
+
+              <article class="cart-item">
+                <img src="https://www.zegelvirtual.com/sites/default/files/styles/producto_carrito/public/productos/BASICO.jpg.webp?itok=4eheo5nX" alt="" class="cart-item__img">
+                <div class="cart-item__body">
+                  <h3>Excel Básico</h3>
+                  <div class="price">S/. 279.00</div>
+                  <a href="" class="cart-item__delete">
+                    <i class="fa fa-trash-alt"></i>
+                  </a>
+                </div>
+              </article>
+
+              <article class="cart-item">
+                <img src="https://www.zegelvirtual.com/sites/default/files/styles/producto_carrito/public/productos/BASICO.jpg.webp?itok=4eheo5nX" alt="" class="cart-item__img">
+                <div class="cart-item__body">
+                  <h3>Excel Básico</h3>
+                  <div class="price">S/. 279.00</div>
+                  <a href="" class="cart-item__delete">
+                    <i class="fa fa-trash-alt"></i>
+                  </a>
+                </div>
+              </article>
+
+              <article class="cart-item">
+                <img src="https://www.zegelvirtual.com/sites/default/files/styles/producto_carrito/public/productos/BASICO.jpg.webp?itok=4eheo5nX" alt="" class="cart-item__img">
+                <div class="cart-item__body">
+                  <h3>Excel Básico</h3>
+                  <div class="price">S/. 279.00</div>
+                  <a href="" class="cart-item__delete">
+                    <i class="fa fa-trash-alt"></i>
+                  </a>
+                </div>
+              </article>
+
+              <article class="cart-item">
+                <img src="https://www.zegelvirtual.com/sites/default/files/styles/producto_carrito/public/productos/BASICO.jpg.webp?itok=4eheo5nX" alt="" class="cart-item__img">
+                <div class="cart-item__body">
+                  <h3>Excel Básico</h3>
+                  <div class="price">S/. 279.00</div>
+                  <a href="" class="cart-item__delete">
+                    <i class="fa fa-trash-alt"></i>
+                  </a>
+                </div>
+              </article>
+            </div>
+            <div>
+              <div class="l-cart-modal__prices">
+                <p>
+                  <span>Subtotal</span>
+                  <span>S/ 1674.00</span>
+                </p>
+                <p>
+                  <span>Total</span>
+                  <span>S/ 1380.00</span>
+                </p>
+              </div>
+              <a href="detalle-pago.html" class="cart-btn cart-btn--block">Comprar</a>
+              <a href="#" class="link" onclick="document.getElementById('close-cart-modal').click(); return false;">
+                Seguir comprando
+                <i class="fa fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- Contanido modal -->
+      </div>
+    </div>
+  </div>
+  <!-- End Modal -->
+  
+  <header class="site-header">
+    <div class="container">
+      <button id="toggle-navbar" class="navbar__toggler" aria-expanded="false">
+        <i class="fa fa-bars"></i>
+      </button>
+
+      <a class="brand" th:href="@{/}">HOMER</a>
+    
+      <nav id="navbar" class="navbar">
+        <header class="navbar__mobile-header navbar__link">
+          <button class="navbar__mobile-close" id="navbar-close">
+            <i class="fa fa-times"></i>
+          </button>
+        </header>
+        <a class="navbar__link" th:href="@{/cursos}">Cursos</a>
+        <a class="navbar__link" th:href="@{/programas}">Programas</a>
+        <a class="navbar__link navbar__link--active" th:href="@{/membresias}">Membresía</a>
+      </nav><!-- .navbar -->
+
+      <div class="site-header__actions">
+        <a class="shopping-cart" th:href="@{/carrito}">
+          <span class="shopping-cart__badge">
+            2
+          </span>
+          <i class="fa fa-shopping-cart"></i>
+        </a>
+        <a class="login-icon" href="login.html">
+          <i class="far fa-user"></i>
+        </a>
+        <a href="#" class="btn btn--outline btn--outline-white">Ingresar</a>
+        <a href="#hero-formulario" class="btn btn--secondary">Informes</a>
+      </div>
+    </div><!-- .container -->
+  </header><!-- .site-header -->
+
+  <main>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ul>
+          <li>
+            <a th:href="@{/}">
+              <i class="fa fa-home"></i>
+            </a>
+          </li>
+          <li>
+            <a th:href="@{/membresias}">
+              Membresía
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="l-grid-page">
+        <article class="card card--program">
+          <a class="card__img" th:href="@{/membership}" ><!--th:href="@{/membership}"-->
+            <img src="https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/membresia-anual.jpg.webp?itok=8GEm9X9v" alt="Imágen">
+            <h3 class="card__img-title">Membresía Anual</h3>
+          </a><!-- .card__img -->
+          <div class="card__body">
+            <p class="card__text">Con nuestra membresía anual estudia a tu ritmo con acompañamiento docente en nuestra plataforma virtual 24/7.</p>
+            
+            <div class="d-flex justify-content-between prices">
+              <p>
+                <a href="" class="card__link">ver más</a>
+              </p>
+
+              <p class="price">
+                <span>S/ 279</span>
+                <span>S/ 237</span>
+              </p>
+            </div>
+
+            <div class="card__buttons">
+              <a class="btn btn--outline btn--outline-primary btn--rounded" href="#" data-modal="#modal-cart">
+                <i class="fa fa-shopping-cart"></i>
+              </a>
+              <a class="btn btn--outline btn--outline-primary btn--full" href="comprar-ahora.html">
+                Comprar ahora
+              </a>
+            </div>
+          </div><!-- .card__body -->
+        </article><!-- .card -->
+
+        <article class="card card--program">
+          <a class="card__img" href="membership.html">
+            <img src="https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/membresia-anual.jpg.webp?itok=8GEm9X9v" alt="Imágen">
+            <h3 class="card__img-title">Membresía Semestral</h3>
+          </a><!-- .card__img -->
+          <div class="card__body">
+            <p class="card__text">Con nuestra membresía de 6 meses adquiere hoy los conocimientos más solicitados por las empresas.</p>
+            
+            <div class="d-flex justify-content-between prices">
+              <p>
+                <a href="" class="card__link">ver más</a>
+              </p>
+
+              <p class="price">
+                <span>S/ 279</span>
+                <span>S/ 237</span>
+              </p>
+            </div>
+
+            <div class="card__buttons">
+              <a class="btn btn--outline btn--outline-primary btn--rounded" href="#" data-modal="#modal-cart">
+                <i class="fa fa-shopping-cart"></i>
+              </a>
+              <a class="btn btn--outline btn--outline-primary btn--full" href="comprar-ahora.html">
+                Comprar ahora
+              </a>
+            </div>
+          </div><!-- .card__body -->
+        </article><!-- .card -->
+      </div>
+    </div><!-- .container -->
+  </main>
+
+  <footer class="site-footer" style="position: relative; z-index: 100000">
+    <div class="container">
+      <div class="site-footer__top">
+        <div class="partof">
+          <p>Somos parte de</p>
+          <img src="https://www.zegelvirtual.com/sites/default/files/libro-reclamaciones.png" alt="">
+        </div>
+
+        <a class="img-b" href="#algo">
+          <img src="https://www.zegelvirtual.com/sites/default/files/libro-reclamaciones.png" alt="">
+        </a>
+      </div>
+      <div class="site-footer__bottom">
+        <nav class="site-footer__nav">
+          <a href="cursos.html">Cursos</a>
+          <a href="programas.html">Programas</a>
+          <a href="membresias.html">Membresía</a>
+          <a href="termns.html">Términos y Condiciones</a>
+          <a href="termns.html">Políticas de Privacidad</a>
+        </nav>
+
+        <div class="follow">
+          <p>Síguenos en</p>
+          <a href="https://www.facebook.com" target="_blank">
+            <i class="fab fa-facebook"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <!-- OWL Slider -->
+  <script src="./assets/js/owl.carousel.min.js"></script>
+  <!-- Scripts -->
+  <script src="./assets/js/app.js"></script>
+</body>
+</html>
