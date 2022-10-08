@@ -314,39 +314,39 @@
             <div class="hero-form" id="hero-formulario">
               <div class="hero-form__body">
                 <h2>Inscríbete aquí</h2>
-                <form action="#" method="post">
+                <form action="guardarIns" method="post">
                   <div class="select">
-                    <select id="course" class="form-control">
+                    <select id="course" class="form-control" name="curso" >
                       <option selected disabled>¿Qué quieres estudiar?</option>
-                      <option value="1">Curso 1</option>
-                      <option value="2">Curso 2</option>
-                      <option value="3">Curso 3</option>
+                      <div th:each="curs: ${cursos}">
+                        <option th:text="${curs.nom_curso}">Curso 1</option>
+                      </div>
                     </select>
                     <i class="fa fa-angle-down"></i>
                   </div>
 
                   <div class="material-input material-input--plomo">
-                    <input type="text" id="names" autocomplete="off">
+                    <input type="text" id="names" autocomplete="off" name="nombres" required="required">
                     <label for="names">Nombres</label>
                   </div>
 
                   <div class="material-input material-input--plomo">
-                    <input type="text" id="lastname" autocomplete="off">
+                    <input type="text" id="lastname" autocomplete="off" name="apellidos" required="required">
                     <label for="lastname">Apellidos</label>
                   </div>
 
                   <div class="material-input material-input--plomo">
-                    <input type="tel" id="phone" autocomplete="off">
+                    <input type="tel" id="phone" autocomplete="off" name="celular" required="required">
                     <label for="phone">Celular</label>
                   </div>
 
                   <div class="material-input material-input--plomo">
-                    <input type="email" id="email" autocomplete="off">
+                    <input type="email" id="email" autocomplete="off" name="email" required="required">
                     <label for="email">Email</label>
                   </div>
 
                   <label class="checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" required="required">
                     <span>
                       Acepto haber leído las <a href="#">políticas de privacidad</a> y los <a >términos y condiciones</a><!--th:href="@{/termns}"-->
                     </span>.

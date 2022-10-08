@@ -175,6 +175,7 @@
         </ul>
       </nav>
       <div class="l-grid-page">
+          <div th:each="program,status: ${programas}">
         <article class="card card--program">
           <a class="card__img" th:href="@{/programa}">
             <img src="https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/BASICO.jpg.webp?itok=f6BeupXy" alt="Imágen">
@@ -408,6 +409,7 @@
             </div>
           </div><!-- .card__body -->
         </article><!-- .card -->
+        </div>
       </div>
     </div><!-- .container -->
   </main>

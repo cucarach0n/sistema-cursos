@@ -22,5 +22,6 @@ public class Programa {
     public Float prec_programa;
     public String desc_programa;
     public String foto_programa;
+    public Float vigencia_programa;
     public Integer act_programa;
 }
