@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IPrograma extends CrudRepository<Programa, Integer> {
 
-    @Query(value="select * from programa order by nom_programa desc",nativeQuery=true)
+    @Query(value="select * from programa where act_programa = 1 order by nom_programa desc",nativeQuery=true)
     List<Programa> listarProgramas();
 }
     

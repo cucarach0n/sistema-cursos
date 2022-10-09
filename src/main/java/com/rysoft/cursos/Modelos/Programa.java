@@ -18,6 +18,7 @@ public class Programa {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY) /* Autoincremental */
     public int id_programa;
+    public float descu_programa;
     public String nom_programa;
     public Float prec_programa;
     public String desc_programa;

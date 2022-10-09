@@ -175,13 +175,13 @@
         </ul>
       </nav>
       <div class="l-grid-page">
-        <article class="card card--program">
+        <article class="card card--program" th:each="membresia: ${membresias}" th:with="descuento=${#numbers.formatDecimal(membresia.prec_membresia, 0,0)} * (${#numbers.formatDecimal(membresia.dscto_membresia, 0,0)} * 0.01)">
           <a class="card__img" th:href="@{/membership}" ><!--th:href="@{/membership}"-->
-            <img src="https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/membresia-anual.jpg.webp?itok=8GEm9X9v" alt="Imágen">
-            <h3 class="card__img-title">Membresía Anual</h3>
+            <img th:src="${membresia.foto_membresia}" alt="Imágen">
+            <h3 class="card__img-title" th:text="${membresia.nom_membresia}">Membresía Anual</h3>
           </a><!-- .card__img -->
           <div class="card__body">
-            <p class="card__text">Con nuestra membresía anual estudia a tu ritmo con acompañamiento docente en nuestra plataforma virtual 24/7.</p>
+            <p class="card__text" th:text="${membresia.desc_membresia}">Con nuestra membresía anual estudia a tu ritmo con acompañamiento docente en nuestra plataforma virtual 24/7.</p>
             
             <div class="d-flex justify-content-between prices">
               <p>
@@ -189,8 +189,8 @@
               </p>
 
               <p class="price">
-                <span>S/ 279</span>
-                <span>S/ 237</span>
+                <span th:text="${'S/ ' + #numbers.formatDecimal(membresia.prec_membresia + descuento, 0,0)}">S/ 279</span>
+                <span th:text="${'S/ ' + #numbers.formatDecimal(membresia.prec_membresia, 0,0)}">S/ 237</span>
               </p>
             </div>
 
@@ -205,35 +205,7 @@
           </div><!-- .card__body -->
         </article><!-- .card -->
 
-        <article class="card card--program">
-          <a class="card__img" href="membership.html">
-            <img src="https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/membresia-anual.jpg.webp?itok=8GEm9X9v" alt="Imágen">
-            <h3 class="card__img-title">Membresía Semestral</h3>
-          </a><!-- .card__img -->
-          <div class="card__body">
-            <p class="card__text">Con nuestra membresía de 6 meses adquiere hoy los conocimientos más solicitados por las empresas.</p>
-            
-            <div class="d-flex justify-content-between prices">
-              <p>
-                <a href="" class="card__link">ver más</a>
-              </p>
-
-              <p class="price">
-                <span>S/ 279</span>
-                <span>S/ 237</span>
-              </p>
-            </div>
-
-            <div class="card__buttons">
-              <a class="btn btn--outline btn--outline-primary btn--rounded" href="#" data-modal="#modal-cart">
-                <i class="fa fa-shopping-cart"></i>
-              </a>
-              <a class="btn btn--outline btn--outline-primary btn--full" href="comprar-ahora.html">
-                Comprar ahora
-              </a>
-            </div>
-          </div><!-- .card__body -->
-        </article><!-- .card -->
+        
       </div>
     </div><!-- .container -->
   </main>
