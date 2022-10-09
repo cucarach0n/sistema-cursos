@@ -371,33 +371,33 @@
             <p class="page-section__description">Cursos 100% virtuales diseñados por verdaderos especialistas en su rubro. ¡Cómpralos HOY!</p>
           </div>
 
-          <section class="subsection">
+          <section class="subsection" th:each="categoria,status: ${categoriasCursos}">
             <header class="subsection-header">
-              <h3>Excel</h3>
+              <h3 th:text="${categoria.nom_categoria}">Excel</h3>
               <a href="cursos.html">Ver Todos</a>
             </header>
-
+            
             <div class="slider-courses">
-              <div class="l-grid-courses">
-                <article class="card">
+              <div class="l-grid-courses" >
+                <article class="card" th:each="curso: ${categoria.cursos}" th:with="descuento=${#numbers.formatDecimal(curso.prec_curso, 0,0)} * (${#numbers.formatDecimal(curso.descto_curso, 0,0)} * 0.01)">
                   <a class="card__img" th:href="@{/course}"><!--(id=${curso.id})-->
-                    <img src="https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/BASICO.jpg.webp?itok=f6BeupXy" alt="Imágen">
+                    <img th:src="${curso.foto_curso}" alt="Imágen">
                   </a><!-- .card__img -->
                   <div class="card__body">
                     <a th:href="@{/course}" style="text-decoration: none;">
-                      <h4 class="card__title">Excel Básico</h4>
+                      <h4 class="card__title" th:text="${curso.nom_curso}">Excel Básico</h4>
                     </a>
                     <p>Por <strong>Jose Carlos Rivas</strong></p>
                     
                     <div class="d-flex justify-content-between prices">
                       <p>
                         <i class="far fa-clock"></i>
-                        22 horas
+                        <span th:text="${#numbers.formatDecimal(curso.dur_curso, 0,0)} +' horas'">22 horas</span>
                       </p>
   
                       <p class="price">
-                        <span>S/ 279</span>
-                        <span>S/ 237</span>
+                        <span th:text="${'S/ ' + #numbers.formatDecimal(curso.prec_curso + descuento, 0,0)}">S/ 279</span>
+                        <span th:text="${'S/ ' + #numbers.formatDecimal(curso.prec_curso, 0,0)}">S/ 237</span>
                       </p>
                     </div>
   
@@ -412,250 +412,12 @@
                   </div><!-- .card__body -->
                 </article><!-- .card -->
   
-                <article class="card">
-                  <a class="card__img" href="course.html">
-                    <img src="https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/BASICO.jpg.webp?itok=f6BeupXy" alt="Imágen">
-                  </a><!-- .card__img -->
-                  <div class="card__body">
-                    <a href="course.html" style="text-decoration: none;">
-                      <h4 class="card__title">Excel Básico</h4>
-                    </a>
-                    <p>Por <strong>Jose Carlos Rivas</strong></p>
-                    
-                    <div class="d-flex justify-content-between prices">
-                      <p>
-                        <i class="far fa-clock"></i>
-                        22 horas
-                      </p>
-  
-                      <p class="price">
-                        <span>S/ 279</span>
-                        <span>S/ 237</span>
-                      </p>
-                    </div>
-  
-                    <div class="card__buttons">
-                      <a class="btn btn--outline btn--outline-primary btn--rounded" href="#" data-modal="#modal-cart">
-                        <i class="fa fa-shopping-cart"></i>
-                      </a>
-                      <a class="btn btn--outline btn--outline-primary btn--full" href="comprar-ahora.html">
-                        Comprar ahora
-                      </a>
-                    </div>
-                  </div><!-- .card__body -->
-                </article><!-- .card -->
-  
-                <article class="card">
-                  <a class="card__img" href="course.html">
-                    <img src="https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/BASICO.jpg.webp?itok=f6BeupXy" alt="Imágen">
-                  </a><!-- .card__img -->
-                  <div class="card__body">
-                    <a href="course.html" style="text-decoration: none;">
-                      <h4 class="card__title">Excel Básico</h4>
-                    </a>
-                    <p>Por <strong>Jose Carlos Rivas</strong></p>
-                    
-                    <div class="d-flex justify-content-between prices">
-                      <p>
-                        <i class="far fa-clock"></i>
-                        22 horas
-                      </p>
-  
-                      <p class="price">
-                        <span>S/ 279</span>
-                        <span>S/ 237</span>
-                      </p>
-                    </div>
-  
-                    <div class="card__buttons">
-                      <a class="btn btn--outline btn--outline-primary btn--rounded" href="#" data-modal="#modal-cart">
-                        <i class="fa fa-shopping-cart"></i>
-                      </a>
-                      <a class="btn btn--outline btn--outline-primary btn--full" href="comprar-ahora.html">
-                        Comprar ahora
-                      </a>
-                    </div>
-                  </div><!-- .card__body -->
-                </article><!-- .card -->
-  
-                <article class="card">
-                  <a class="card__img" href="course.html">
-                    <img src="https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/BASICO.jpg.webp?itok=f6BeupXy" alt="Imágen">
-                  </a><!-- .card__img -->
-                  <div class="card__body">
-                    <a href="course.html" style="text-decoration: none;">
-                      <h4 class="card__title">Excel Básico</h4>
-                    </a>
-                    <p>Por <strong>Jose Carlos Rivas</strong></p>
-                    
-                    <div class="d-flex justify-content-between prices">
-                      <p>
-                        <i class="far fa-clock"></i>
-                        22 horas
-                      </p>
-  
-                      <p class="price">
-                        <span>S/ 279</span>
-                        <span>S/ 237</span>
-                      </p>
-                    </div>
-  
-                    <div class="card__buttons">
-                      <a class="btn btn--outline btn--outline-primary btn--rounded" href="#" data-modal="#modal-cart">
-                        <i class="fa fa-shopping-cart"></i>
-                      </a>
-                      <a class="btn btn--outline btn--outline-primary btn--full" href="comprar-ahora.html">
-                        Comprar ahora
-                      </a>
-                    </div>
-                  </div><!-- .card__body -->
-                </article><!-- .card -->
+                
               </div><!-- .l-grid-courses -->
             </div>
           </section>
 
-          <section class="subsection">
-            <header class="subsection-header">
-              <h3>Marketing Digital</h3>
-              <a href="cursos.html">Ver Todos</a>
-            </header>
-
-            <div class="slider-courses">
-              <div class="l-grid-courses">
-                <article class="card">
-                  <a class="card__img" href="course.html">
-                    <img src="https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/BASICO.jpg.webp?itok=f6BeupXy" alt="Imágen">
-                  </a><!-- .card__img -->
-                  <div class="card__body">
-                    <a href="course.html" style="text-decoration: none;">
-                      <h4 class="card__title">Excel Básico</h4>
-                    </a>
-                    <p>Por <strong>Jose Carlos Rivas</strong></p>
-                    
-                    <div class="d-flex justify-content-between prices">
-                      <p>
-                        <i class="far fa-clock"></i>
-                        22 horas
-                      </p>
-  
-                      <p class="price">
-                        <span>S/ 279</span>
-                        <span>S/ 237</span>
-                      </p>
-                    </div>
-  
-                    <div class="card__buttons">
-                      <a class="btn btn--outline btn--outline-primary btn--rounded" href="#" data-modal="#modal-cart">
-                        <i class="fa fa-shopping-cart"></i>
-                      </a>
-                      <a class="btn btn--outline btn--outline-primary btn--full" href="comprar-ahora.html">
-                        Comprar ahora
-                      </a>
-                    </div>
-                  </div><!-- .card__body -->
-                </article><!-- .card -->
-  
-                <article class="card">
-                  <a class="card__img" href="course.html">
-                    <img src="https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/BASICO.jpg.webp?itok=f6BeupXy" alt="Imágen">
-                  </a><!-- .card__img -->
-                  <div class="card__body">
-                    <a href="course.html" style="text-decoration: none;">
-                      <h4 class="card__title">Excel Básico</h4>
-                    </a>
-                    <p>Por <strong>Jose Carlos Rivas</strong></p>
-                    
-                    <div class="d-flex justify-content-between prices">
-                      <p>
-                        <i class="far fa-clock"></i>
-                        22 horas
-                      </p>
-  
-                      <p class="price">
-                        <span>S/ 279</span>
-                        <span>S/ 237</span>
-                      </p>
-                    </div>
-  
-                    <div class="card__buttons">
-                      <a class="btn btn--outline btn--outline-primary btn--rounded" href="#" data-modal="#modal-cart">
-                        <i class="fa fa-shopping-cart"></i>
-                      </a>
-                      <a class="btn btn--outline btn--outline-primary btn--full" href="comprar-ahora.html">
-                        Comprar ahora
-                      </a>
-                    </div>
-                  </div><!-- .card__body -->
-                </article><!-- .card -->
-  
-                <article class="card">
-                  <a class="card__img" href="course.html">
-                    <img src="https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/BASICO.jpg.webp?itok=f6BeupXy" alt="Imágen">
-                  </a><!-- .card__img -->
-                  <div class="card__body">
-                    <a href="course.html" style="text-decoration: none;">
-                      <h4 class="card__title">Excel Básico</h4>
-                    </a>
-                    <p>Por <strong>Jose Carlos Rivas</strong></p>
-                    
-                    <div class="d-flex justify-content-between prices">
-                      <p>
-                        <i class="far fa-clock"></i>
-                        22 horas
-                      </p>
-  
-                      <p class="price">
-                        <span>S/ 279</span>
-                        <span>S/ 237</span>
-                      </p>
-                    </div>
-  
-                    <div class="card__buttons">
-                      <a class="btn btn--outline btn--outline-primary btn--rounded" href="#" data-modal="#modal-cart">
-                        <i class="fa fa-shopping-cart"></i>
-                      </a>
-                      <a class="btn btn--outline btn--outline-primary btn--full" href="comprar-ahora.html">
-                        Comprar ahora
-                      </a>
-                    </div>
-                  </div><!-- .card__body -->
-                </article><!-- .card -->
-  
-                <article class="card">
-                  <a class="card__img" href="course.html">
-                    <img src="https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/BASICO.jpg.webp?itok=f6BeupXy" alt="Imágen">
-                  </a><!-- .card__img -->
-                  <div class="card__body">
-                    <a href="course.html" style="text-decoration: none;">
-                      <h4 class="card__title">Excel Básico</h4>
-                    </a>
-                    <p>Por <strong>Jose Carlos Rivas</strong></p>
-                    
-                    <div class="d-flex justify-content-between prices">
-                      <p>
-                        <i class="far fa-clock"></i>
-                        22 horas
-                      </p>
-  
-                      <p class="price">
-                        <span>S/ 279</span>
-                        <span>S/ 237</span>
-                      </p>
-                    </div>
-  
-                    <div class="card__buttons">
-                      <a class="btn btn--outline btn--outline-primary btn--rounded" href="#" data-modal="#modal-cart">
-                        <i class="fa fa-shopping-cart"></i>
-                      </a>
-                      <a class="btn btn--outline btn--outline-primary btn--full" href="comprar-ahora.html">
-                        Comprar ahora
-                      </a>
-                    </div>
-                  </div><!-- .card__body -->
-                </article><!-- .card -->
-              </div><!-- .l-grid-courses -->
-            </div>
-          </section>
+          
         </section><!-- .page-section -->
 
         <section class="page-section">
@@ -667,34 +429,34 @@
           <section class="subsection">
             <div class="slider-courses">
               <div class="l-grid-courses">
-                <article class="card card--program">
+                <article th:each="program,status: ${programas}" th:with="descuento=${#numbers.formatDecimal(program.prec_programa, 0,0)} * (${#numbers.formatDecimal(program.descu_programa, 0,0)} * 0.01)" class="card card--program">
                   <a class="card__img" th:href="@{/programa}">
-                    <img src="https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/BASICO.jpg.webp?itok=f6BeupXy" alt="Imágen">
-                    <h3 class="card__img-title">Programa de especialista en Excel</h3>
+                    <img th:src="${program.foto_programa}" alt="Imágen">
+                    <h3 class="card__img-title" th:text="${program.nom_programa}">Programa de especialista en Excel</h3>
                   </a><!-- .card__img -->
                   <div class="card__body">
                     
                     <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 15px">
                       <span>
                         <i class="far fa-calendar"></i>
-                        3 meses
+                        <span th:text="${#numbers.formatDecimal(program.vigencia_programa,0,0) + ' meses'}">3 meses</span>
                       </span>
-                      <span>3 cursos</span>
+                      <span th:text="${program.cantCurso_programa + ' cursos'}">3 cursos</span>
                     </div>
-  
-                    <p class="card__text">Maneja datos y realiza gráficas, genera tablas dinámicas y ejecuta funciones que te permitan analizar datos...</p>
+      
+                    <p class="card__text" th:text="${program.desc_programa}">Maneja datos y realiza gráficas, genera tablas dinámicas y ejecuta funciones que te permitan analizar datos...</p>
                     
                     <div class="d-flex justify-content-between prices">
                       <p>
                         <a href="" class="card__link">ver más</a>
                       </p>
-  
+      
                       <p class="price">
-                        <span>S/ 279</span>
-                        <span>S/ 237</span>
+                        <span th:text="${'S/ ' + #numbers.formatDecimal(program.prec_programa + descuento,0,0) }">S/ 279</span>
+                        <span th:text="${'S/ ' + #numbers.formatDecimal(program.prec_programa,0,0)}">S/ 237</span>
                       </p>
                     </div>
-  
+      
                     <div class="card__buttons">
                       <a class="btn btn--outline btn--outline-primary btn--rounded" href="#" data-modal="#modal-cart">
                         <i class="fa fa-shopping-cart"></i>
@@ -706,122 +468,7 @@
                   </div><!-- .card__body -->
                 </article><!-- .card -->
   
-                <article class="card card--program">
-                  <a class="card__img" href="programa.html">
-                    <img src="https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/BASICO.jpg.webp?itok=f6BeupXy" alt="Imágen">
-                    <h3 class="card__img-title">Programa de especialista en Excel</h3>
-                  </a><!-- .card__img -->
-                  <div class="card__body">
-                    
-                    <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 15px">
-                      <span>
-                        <i class="far fa-calendar"></i>
-                        3 meses
-                      </span>
-                      <span>3 cursos</span>
-                    </div>
-  
-                    <p class="card__text">Maneja datos y realiza gráficas, genera tablas dinámicas y ejecuta funciones que te permitan analizar datos...</p>
-                    
-                    <div class="d-flex justify-content-between prices">
-                      <p>
-                        <a href="" class="card__link">ver más</a>
-                      </p>
-  
-                      <p class="price">
-                        <span>S/ 279</span>
-                        <span>S/ 237</span>
-                      </p>
-                    </div>
-  
-                    <div class="card__buttons">
-                      <a class="btn btn--outline btn--outline-primary btn--rounded" href="#" data-modal="#modal-cart">
-                        <i class="fa fa-shopping-cart"></i>
-                      </a>
-                      <a class="btn btn--outline btn--outline-primary btn--full" href="comprar-ahora.html">
-                        Comprar ahora
-                      </a>
-                    </div>
-                  </div><!-- .card__body -->
-                </article><!-- .card -->
-  
-                <article class="card card--program">
-                  <a class="card__img" href="programa.html">
-                    <img src="https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/BASICO.jpg.webp?itok=f6BeupXy" alt="Imágen">
-                    <h3 class="card__img-title">Programa de especialista en Excel</h3>
-                  </a><!-- .card__img -->
-                  <div class="card__body">
-                    
-                    <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 15px">
-                      <span>
-                        <i class="far fa-calendar"></i>
-                        3 meses
-                      </span>
-                      <span>3 cursos</span>
-                    </div>
-  
-                    <p class="card__text">Maneja datos y realiza gráficas, genera tablas dinámicas y ejecuta funciones que te permitan analizar datos...</p>
-                    
-                    <div class="d-flex justify-content-between prices">
-                      <p>
-                        <a href="" class="card__link">ver más</a>
-                      </p>
-  
-                      <p class="price">
-                        <span>S/ 279</span>
-                        <span>S/ 237</span>
-                      </p>
-                    </div>
-  
-                    <div class="card__buttons">
-                      <a class="btn btn--outline btn--outline-primary btn--rounded" href="#" data-modal="#modal-cart">
-                        <i class="fa fa-shopping-cart"></i>
-                      </a>
-                      <a class="btn btn--outline btn--outline-primary btn--full" href="comprar-ahora.html">
-                        Comprar ahora
-                      </a>
-                    </div>
-                  </div><!-- .card__body -->
-                </article><!-- .card -->
-  
-                <article class="card card--program">
-                  <a class="card__img" href="programa.html">
-                    <img src="https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/BASICO.jpg.webp?itok=f6BeupXy" alt="Imágen">
-                    <h3 class="card__img-title">Programa de especialista en Excel</h3>
-                  </a><!-- .card__img -->
-                  <div class="card__body">
-                    
-                    <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 15px">
-                      <span>
-                        <i class="far fa-calendar"></i>
-                        3 meses
-                      </span>
-                      <span>3 cursos</span>
-                    </div>
-  
-                    <p class="card__text">Maneja datos y realiza gráficas, genera tablas dinámicas y ejecuta funciones que te permitan analizar datos...</p>
-                    
-                    <div class="d-flex justify-content-between prices">
-                      <p>
-                        <a href="" class="card__link">ver más</a>
-                      </p>
-  
-                      <p class="price">
-                        <span>S/ 279</span>
-                        <span>S/ 237</span>
-                      </p>
-                    </div>
-  
-                    <div class="card__buttons">
-                      <a class="btn btn--outline btn--outline-primary btn--rounded" href="#" data-modal="#modal-cart">
-                        <i class="fa fa-shopping-cart"></i>
-                      </a>
-                      <a class="btn btn--outline btn--outline-primary btn--full" href="comprar-ahora.html">
-                        Comprar ahora
-                      </a>
-                    </div>
-                  </div><!-- .card__body -->
-                </article><!-- .card -->
+                
               </div><!-- .l-grid-courses -->
             </div>
           </section>

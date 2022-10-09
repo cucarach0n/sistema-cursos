@@ -26,8 +26,8 @@ public class CursoService implements ICursoService {
         return data.findCursoCategoria();
     }
     @Override
-    public List<Curso> filtrarCursosByCategoria(int[] categorias) {
-        return data.filtrarCursosByCategoria(categorias);
+    public List<Curso> filtrarCursosByCategorias(int[] categorias) {
+        return data.filtrarCursosByCategorias(categorias);
     }
     @Override
     public List<Curso> filtrarCursosByNombre(String nombreCurso) {
@@ -36,5 +36,13 @@ public class CursoService implements ICursoService {
     @Override
     public List<Curso> filtrarCursosByNombreCategoria(int[] categorias, String nombreCurso) {
         return data.filtrarCursosByNombreCategoria(categorias, nombreCurso);
+    }
+    @Override
+    public List<Curso> filtrarCursosByPrograma(int id_programa) {
+        return data.filtrarCursosByPrograma(id_programa);
+    }
+    @Override
+    public List<Curso> filtrarCursosByCategoria(int id_categoria) {
+        return data.filtrarCursosByCategoria(id_categoria);
     }
 }

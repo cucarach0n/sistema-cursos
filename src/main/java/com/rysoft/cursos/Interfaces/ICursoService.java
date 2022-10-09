@@ -14,7 +14,12 @@ import java.util.List;
  */
 public interface ICursoService {
     public List<Curso> listarCursosCategoria();
-    public List<Curso> filtrarCursosByCategoria(int[] categorias);
+    public List<Curso> filtrarCursosByCategorias(int[] categorias);
+
+    public List<Curso> filtrarCursosByCategoria(int id_categoria);
+
     public List<Curso> filtrarCursosByNombre(String nombreCurso);
     List<Curso> filtrarCursosByNombreCategoria(int[] categorias,String nombreCurso);
+
+    public List<Curso> filtrarCursosByPrograma(int id_programa);
 }

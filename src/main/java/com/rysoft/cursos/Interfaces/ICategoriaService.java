@@ -3,5 +3,5 @@ import com.rysoft.cursos.Modelos.Categoria;
 import java.util.List;
 public interface ICategoriaService {
     public List<Categoria> listarCategorias();
-    
+    List<Categoria> listarCategoriasLimite( int limite);
 }
