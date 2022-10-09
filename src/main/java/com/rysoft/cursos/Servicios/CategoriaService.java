@@ -15,5 +15,9 @@ public class CategoriaService implements ICategoriaService {
     public List<Categoria> listarCategorias() {
         return data.listarCategorias();
     }
+    @Override
+    public List<Categoria> listarCategoriasLimite( int limite){
+        return data.listarCategoriasLimite(limite);
+    }
     
 }

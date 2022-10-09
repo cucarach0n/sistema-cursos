@@ -9,4 +9,7 @@ public interface ICategoria extends CrudRepository<Categoria, Integer> {
 
     @Query(value="select * from categoria order by nom_categoria desc",nativeQuery=true)
     List<Categoria> listarCategorias();
+
+    @Query(value="select * from categoria order by nom_categoria LIMIT :limite",nativeQuery=true)
+    List<Categoria> listarCategoriasLimite( int limite);
 }
