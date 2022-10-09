@@ -44,7 +44,7 @@ public class ControllerCurso {
     public String FiltraCursoByCategoria(@RequestParam(value = "categorias[]", required=false) int[] cats ,@RequestParam("nombrecurso") String cursoName,Model model) {
         List<Curso> cur = cursoServicio.listarCursosCategoria();
         if(cats != null && cursoName.isEmpty()){
-            cur = cursoServicio.filtrarCursosByCategoria(cats);
+            cur = cursoServicio.filtrarCursosByCategorias(cats);
         }
         else if(cats == null && !cursoName.isEmpty()){
             cur = cursoServicio.filtrarCursosByNombre(cursoName);
