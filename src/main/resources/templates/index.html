@@ -19,132 +19,9 @@
   <link rel="stylesheet" href="./assets/css/app.css">
 </head>
 <body>
-
-  <!-- Modal -->
-  <div class="modal" id="modal">
-    <div class="modal-content">
-      <button class="modal-button-close">&times;</button>
-      <div class="card card__body">
-        <!-- Tabs -->
-        <div class="center tabs--forms" style="padding: 1rem;">
-          <nav class="navbar-tabs" data-tabs="auth-tabs">
-            <a href="#login" class="nav-link active">Iniciar Sesión</a>
-            <a href="#register" class="nav-link">Registro</a>
-          </nav>
-          <div class="tabs" id="auth-tabs">
-            <div class="tabs-content">
-              <section id="login" class="tab-active"><!-- Importante esta clse tab active -->
-                <form action="">
-                  <div class="material-input material-input--primary">
-                    <input type="email" id="email" autocomplete="off">
-                    <label for="email">Correo electrónico</label>
-                  </div>
-
-                  <div class="material-input material-input--primary">
-                    <input type="password" id="pass" autocomplete="off">
-                    <label for="pass">Contraseña</label>
-                  </div>
-
-                  <p>
-                    <a href="reset-password.html">He olvidado mi contraseña</a>
-                  </p>
-
-                  <p class="t-center">
-                    <input type="submit" value="Ingresar" class="btn btn--primary">
-                  </p>
-                </form>
-              </section>
-              <section id="register">
-                  <form action="registrar" method="POST" class="l-form-modal">
-                  <h3 class="l-form-modal__full">Crea tu cuenta</h3>
-
-                  <div class="material-input material-input--primary">
-                    <input type="email" id="email" autocomplete="off" required="required">
-                    <label for="email">Correo electrónico</label>
-                  </div>
-
-                  <div class="material-input material-input--primary" required="required">
-                    <input type="password" id="pass" autocomplete="off">
-                    <label for="pass">Contraseña</label>
-                  </div>
-
-                  <h3 class="l-form-modal__full">Llena tus datos</h3>
-
-                  <div class="material-input material-input--primary" required="required">
-                      <input type="text" id="nom_persona" autocomplete="off">
-                    <label for="text">Nombre</label>
-                  </div>
-
-                  <div class="material-input material-input--primary">
-                    <input type="text" id="ape_persona" autocomplete="off" required="required">
-                    <label for="text">Apellidos</label>
-                  </div>
-
-                  <div class="material-input material-input--primary">
-                      <input type="text" id="dni_persona" autocomplete="off">
-                    <label for="text">Documento de identidad</label>
-                  </div>
-
-                  <div class="material-input material-input--primary">
-                      <input type="text" id="direccion" autocomplete="off">
-                    <label for="text">Direcci&oacute;n</label>
-                  </div>
-
-                  <div class="material-input material-input--primary">
-                    <input type="date" id="fechanacimiento" autocomplete="off" required="required">
-                    
-                  </div>
-
-                  <div class="material-input material-input--primary">
-                      <input type="number" id="telefono" autocomplete="off">
-                    <label for="number">Tel&eacute;fono</label>
-                  </div>
-
-                  <h3 class="l-form-modal__full">¿Factura?</h3>
-
-                  <div class="l-form-modal__full">
-                    <label class="d-iflex aic" style="margin-right: 10px;">
-                          <input type="radio" name="factura" style="margin-right: 5px;">
-                      Si
-                    </label>
-                    <label class="d-iflex aic">
-                      <input type="radio" name="factura" style="margin-right: 5px;">
-                      No
-                    </label>
-                  </div>
-
-                  <div class="material-input material-input--primary">
-                    <input type="text" id="nombre" autocomplete="off">
-                    <label for="text">Nombre</label>
-                  </div>
-
-                  <div class="material-input material-input--primary">
-                      <input type="text" id="ruc" autocomplete="off">
-                    <label for="text">RUC</label>
-                  </div>
-
-                  <div class="material-input material-input--primary">
-                    <input type="password" id="pass" autocomplete="off">
-                    <label for="pass">Contraseña</label>
-                  </div>
-
-                  <p class="l-form-modal__full">
-                    Tus datos personales se utilizarán para procesar tu pedido, mejorar tu experiencia en esta web, gestionar el acceso a tu cuenta y otros propósitos, conoce nuestros <a href="">términos y condiciones</a>
-                  </p>
-
-                  <p class="l-form-modal__full t-center">
-                    <input type="submit" value="Crear Cuenta" class="btn btn--primary">
-                  </p>
-                </form>
-              </section>
-            </div>
-          </div>
-        </div>
-        <!-- End Tabs -->
-      </div>
-    </div>
-  </div>
-  <!-- End Modal -->
+  <!-- Modal Inicio sesion Registro-->
+  <div th:insert="menu::#modal-login"></div>
+  <!-- End Modal Inicio sesion Registro-->
 
   <div class="fixed-actions">
     <div class="container">
@@ -158,96 +35,9 @@
     </div>
   </div>
 
-  <!-- Modal -->
-  <div class="modal modal--cart" id="modal-cart">
-    <div class="modal-content">
-      <button class="modal-button-close" id="close-cart-modal">&times;</button>
-      <div class="card card__body l-cart-modal">
-        <!-- Contanido modal -->
-        <div>
-          <h2>Tu carrito de compras</h2>
-          <p style="font-size: 16px !important; margin: .2rem 0 1.1rem 0;">Tienes 4 items en tu carrito</p>
-          <div class="l-cart-modal__main">
-            <div>
-              <article class="cart-item">
-                <img src="https://www.zegelvirtual.com/sites/default/files/styles/producto_carrito/public/productos/BASICO.jpg.webp?itok=4eheo5nX" alt="" class="cart-item__img">
-                <div class="cart-item__body">
-                  <h3>Excel Básico</h3>
-                  <div class="price">S/. 279.00</div>
-                  <a href="" class="cart-item__delete">
-                    <i class="fa fa-trash-alt"></i>
-                  </a>
-                </div>
-              </article>
-
-              <article class="cart-item">
-                <img src="https://www.zegelvirtual.com/sites/default/files/styles/producto_carrito/public/productos/BASICO.jpg.webp?itok=4eheo5nX" alt="" class="cart-item__img">
-                <div class="cart-item__body">
-                  <h3>Excel Básico</h3>
-                  <div class="price">S/. 279.00</div>
-                  <a href="" class="cart-item__delete">
-                    <i class="fa fa-trash-alt"></i>
-                  </a>
-                </div>
-              </article>
-
-              <article class="cart-item">
-                <img src="https://www.zegelvirtual.com/sites/default/files/styles/producto_carrito/public/productos/BASICO.jpg.webp?itok=4eheo5nX" alt="" class="cart-item__img">
-                <div class="cart-item__body">
-                  <h3>Excel Básico</h3>
-                  <div class="price">S/. 279.00</div>
-                  <a href="" class="cart-item__delete">
-                    <i class="fa fa-trash-alt"></i>
-                  </a>
-                </div>
-              </article>
-
-              <article class="cart-item">
-                <img src="https://www.zegelvirtual.com/sites/default/files/styles/producto_carrito/public/productos/BASICO.jpg.webp?itok=4eheo5nX" alt="" class="cart-item__img">
-                <div class="cart-item__body">
-                  <h3>Excel Básico</h3>
-                  <div class="price">S/. 279.00</div>
-                  <a href="" class="cart-item__delete">
-                    <i class="fa fa-trash-alt"></i>
-                  </a>
-                </div>
-              </article>
-
-              <article class="cart-item">
-                <img src="https://www.zegelvirtual.com/sites/default/files/styles/producto_carrito/public/productos/BASICO.jpg.webp?itok=4eheo5nX" alt="" class="cart-item__img">
-                <div class="cart-item__body">
-                  <h3>Excel Básico</h3>
-                  <div class="price">S/. 279.00</div>
-                  <a href="" class="cart-item__delete">
-                    <i class="fa fa-trash-alt"></i>
-                  </a>
-                </div>
-              </article>
-            </div>
-            <div>
-              <div class="l-cart-modal__prices">
-                <p>
-                  <span>Subtotal</span>
-                  <span>S/ 1674.00</span>
-                </p>
-                <p>
-                  <span>Total</span>
-                  <span>S/ 1380.00</span>
-                </p>
-              </div>
-              <a href="detalle-pago.html" class="cart-btn cart-btn--block">Comprar</a>
-              <a href="#" class="link" onclick="document.getElementById('close-cart-modal').click(); return false;">
-                Seguir comprando
-                <i class="fa fa-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-        <!-- Contanido modal -->
-      </div>
-    </div>
-  </div>
-  <!-- End Modal -->
+  <!-- Modal Cart-->
+  <div th:insert="menu::#modal-cart"></div>
+  <!-- End Modal Cart-->
 
   <!-- Contador regresivo -->
   <section class="top-bar">
@@ -269,41 +59,9 @@
   </section> 
   <!-- Fin contador regresivo -->
   
-  <header class="site-header">
-    <div class="container">
-      <button id="toggle-navbar" class="navbar__toggler" aria-expanded="false">
-        <i class="fa fa-bars"></i>
-      </button>
-
-      <a class="brand" th:href="@{/}">HOMER</a>
-    
-      <nav id="navbar" class="navbar">
-        <header class="navbar__mobile-header navbar__link">
-          <button class="navbar__mobile-close" id="navbar-close">
-            <i class="fa fa-times"></i>
-          </button>
-        </header>
-        <a class="navbar__link" th:href="@{/cursos}">Cursos</a>
-        <a class="navbar__link" th:href="@{/programas}">Programas</a>
-        <a class="navbar__link" th:href="@{/membresias}">Membresía</a>
-      </nav><!-- .navbar -->
-
-      <div class="site-header__actions">
-        <a class="shopping-cart" th:href="@{/carrito}">
-          <span class="shopping-cart__badge">
-            2
-          </span>
-          <i class="fa fa-shopping-cart"></i>
-        </a>
-        <a class="login-icon" href="#"  data-modal="#modal"><!-- data-modal es cualquier selector para el modal -->
-          <i class="far fa-user"></i>
-        </a>
-        <a href="#" class="btn btn--outline btn--outline-white" data-modal="#modal">Ingresar</a>
-        <a href="#hero-formulario" class="btn btn--white">Informes</a>
-      </div>
-    </div><!-- .container -->
-  </header><!-- .site-header -->
-
+  <!-- Header -->
+  <div th:insert="menu :: #headerInicio"></div>
+  <!-- End Header -->
   <main>
 
     <div class="hero l-hero-form">
@@ -577,49 +335,7 @@
 
   </main>
 
-  <footer class="site-footer" style="position: relative; z-index: 100000">
-    <div class="container">
-      <div class="site-footer__top">
-        <div class="partof">
-          <p>Somos parte de</p>
-          <img src="https://www.zegelvirtual.com/sites/default/files/libro-reclamaciones.png" alt="">
-        </div>
-
-        <a class="img-b" href="#algo">
-          <img src="https://www.zegelvirtual.com/sites/default/files/libro-reclamaciones.png" alt="">
-        </a>
-      </div>
-      <div class="site-footer__bottom">
-        <nav class="site-footer__nav">
-          <a href="cursos.html">Cursos</a>
-          <a href="programas.html">Programas</a>
-          <a href="membresias.html">Membresía</a>
-          <a href="termns.html">Términos y Condiciones</a>
-          <a href="termns.html">Políticas de Privacidad</a>
-        </nav>
-
-        <div class="follow">
-          <p>Síguenos en</p>
-          <a href="https://www.facebook.com/gruporysoft" target="_blank">
-            <i class="fab fa-facebook"></i>
-          </a>
-          <p>      </p>
-          <a href="https://www.instagram.com/gruporysoft/" target="_blank">
-            <i class="fa-brands fa-instagram"></i>
-          </a>
-          <p>      </p>
-          <a href="https://www.linkedin.com/company/rysoft6/" target="_blank">
-            <i class="fa-brands fa-linkedin"></i>
-          </a>
-          <p>      </p>
-          <a href="https://www.youtube.com/channel/UC8GmdrwylKySjol8o8CGsdw/playlists" target="_blank">
-            <i class="fa-brands fa-youtube"></i>  
-          </a>
-          
-        </div>
-      </div>
-    </div>
-  </footer>
+  <div th:insert="menu :: #footer_inicio"></div>
 
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>

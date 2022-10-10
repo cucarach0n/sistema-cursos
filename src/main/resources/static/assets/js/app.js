@@ -143,7 +143,18 @@ for (i = 0; i < acc.length; i++) {
   events() {
     this.buttons.forEach(button => {
       button.addEventListener('click', e => {
+        
         e.preventDefault();
+        console.log(button.getAttribute('href'));
+
+        fetch("http://localhost:8080"+button.getAttribute('href')).then(function(response) {
+          return response.text();
+        }).then(function(data) {
+          console.log(data);
+        }).catch(function(error) {
+          console.log(error);
+        });
+
         this.modal.classList.add('show');
       });
     });
@@ -158,7 +169,7 @@ for (i = 0; i < acc.length; i++) {
   }
 }
 
-new Modal('#modal');
+new Modal('#modal-login');
 new Modal('#modal-cart');
 
 /**

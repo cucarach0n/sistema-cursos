@@ -15,5 +15,10 @@ public class MembresiaService implements IMembresiaService {
     public List<Membresia> listarMembresias() {
         return data.listarMembresias();
     }
+
+    @Override
+    public Membresia findMembresiaById(int id_membresia) {
+        return data.findMembresiaById(id_membresia);
+    }
     
 }

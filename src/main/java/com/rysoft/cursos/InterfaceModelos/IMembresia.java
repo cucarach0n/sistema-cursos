@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface IMembresia extends CrudRepository<Membresia, Integer> {
     @Query(value="select * from membresia where act_membresia = 1 order by nom_membresia desc",nativeQuery=true)
     List<Membresia> listarMembresias();
+    @Query(value="select * from membresia where id_membresia = :id_membresia",nativeQuery=true)
+    public Membresia findMembresiaById(int id_membresia);
 }
+

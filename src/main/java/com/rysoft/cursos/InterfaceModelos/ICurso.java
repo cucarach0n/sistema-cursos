@@ -36,4 +36,6 @@ public interface ICurso extends CrudRepository<Curso, Integer> {
 
     @Query(value="select * from curso as c inner join categoria as ca on c.id_categoria = ca.id_categoria where c.id_categoria = :id_categoria",nativeQuery=true)
     public List<Curso> filtrarCursosByCategoria(int id_categoria);
+    @Query(value="select * from curso where id_curso = :id_curso",nativeQuery=true)
+    public Curso findCursoById(int id_curso);
 }

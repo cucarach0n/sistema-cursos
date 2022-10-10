@@ -45,4 +45,8 @@ public class CursoService implements ICursoService {
     public List<Curso> filtrarCursosByCategoria(int id_categoria) {
         return data.filtrarCursosByCategoria(id_categoria);
     }
+    @Override
+    public Curso findCursoById(int id_curso) {
+        return data.findCursoById(id_curso);
+    }
 }

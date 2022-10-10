@@ -15,5 +15,8 @@ public class ProgramaService implements IProgramaService {
     public List<Programa> listarProgramas() {
         return data.listarProgramas();
     }
-    
+    @Override
+    public Programa findProgramaById(int id_programa) {
+        return data.findProgramaById(id_programa);
+    }
 }

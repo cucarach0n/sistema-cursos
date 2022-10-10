@@ -22,4 +22,6 @@ public interface ICursoService {
     List<Curso> filtrarCursosByNombreCategoria(int[] categorias,String nombreCurso);
 
     public List<Curso> filtrarCursosByPrograma(int id_programa);
+
+    public Curso findCursoById(int id_curso);
 }

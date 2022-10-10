@@ -19,7 +19,9 @@
   <link rel="stylesheet" href="./assets/css/app.css">
 </head>
 <body>
-
+  <!-- Modal Inicio sesion Registro-->
+  <div th:insert="menu::#modal-login"></div>
+  <!-- End Modal Inicio sesion Registro-->
   <div class="fixed-actions">
     <div class="container">
       <a href="#" class="btn btn--primary btn--info">
@@ -32,40 +34,9 @@
     </div>
   </div>
   
-  <header class="site-header">
-    <div class="container">
-      <button id="toggle-navbar" class="navbar__toggler" aria-expanded="false">
-        <i class="fa fa-bars"></i>
-      </button>
-
-      <a class="brand" th:href="@{/}" >HOMER</a>
-    
-      <nav id="navbar" class="navbar">
-        <header class="navbar__mobile-header navbar__link">
-          <button class="navbar__mobile-close" id="navbar-close">
-            <i class="fa fa-times"></i>
-          </button>
-        </header>
-        <a class="navbar__link" th:href="@{/cursos}">Cursos</a>
-        <a class="navbar__link" th:href="@{/programas}">Programas</a>
-        <a class="navbar__link" th:href="@{/membresias}">Membresía</a>
-      </nav><!-- .navbar -->
-
-      <div class="site-header__actions">
-        <a class="shopping-cart" href="carrito.html">
-          <span class="shopping-cart__badge">
-            2
-          </span>
-          <i class="fa fa-shopping-cart"></i>
-        </a>
-        <a class="login-icon" href="login.html">
-          <i class="far fa-user"></i>
-        </a>
-        <a href="#" class="btn btn--outline btn--outline-white">Ingresar</a>
-        <a href="#hero-formulario" class="btn btn--secondary">Informes</a>
-      </div>
-    </div><!-- .container -->
-  </header><!-- .site-header -->
+  <!-- Header -->
+  <div th:insert="menu :: #headerInicio"></div>
+  <!-- End Header -->
 
   <main>
     <div class="container">
@@ -141,36 +112,7 @@
     </div><!-- .container -->
   </main>
 
-  <footer class="site-footer" style="position: relative; z-index: 100000">
-    <div class="container">
-      <div class="site-footer__top">
-        <div class="partof">
-          <p>Somos parte de</p>
-          <img src="https://www.zegelvirtual.com/sites/default/files/libro-reclamaciones.png" alt="">
-        </div>
-
-        <a class="img-b" href="#algo">
-          <img src="https://www.zegelvirtual.com/sites/default/files/libro-reclamaciones.png" alt="">
-        </a>
-      </div>
-      <div class="site-footer__bottom">
-        <nav class="site-footer__nav">
-          <a href="cursos.html">Cursos</a>
-          <a href="programas.html">Programas</a>
-          <a href="membresias.html">Membresía</a>
-          <a href="termns.html">Términos y Condiciones</a>
-          <a href="termns.html">Políticas de Privacidad</a>
-        </nav>
-
-        <div class="follow">
-          <p>Síguenos en</p>
-          <a href="https://www.facebook.com" target="_blank">
-            <i class="fab fa-facebook"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <div th:insert="menu :: #footer_inicio"></div>
 
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
