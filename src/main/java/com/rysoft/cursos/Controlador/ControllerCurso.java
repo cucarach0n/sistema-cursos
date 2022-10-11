@@ -6,11 +6,12 @@ package com.rysoft.cursos.Controlador;
 
 
 import com.rysoft.cursos.Interfaces.ICursoService;
+import com.rysoft.cursos.Controlador.Util.SessionUtil;
+import com.rysoft.cursos.Entidades.Carrito;
+import com.rysoft.cursos.Entidades.ServicioCarrito;
 import com.rysoft.cursos.Interfaces.ICategoriaService;
 import com.rysoft.cursos.Modelos.Categoria;
 import com.rysoft.cursos.Modelos.Curso;
-import com.rysoft.cursos.entidades.Carrito;
-import com.rysoft.cursos.entidades.ServicioCarrito;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,20 +43,13 @@ public class ControllerCurso {
         model.addAttribute("categorias", categorias);
         model.addAttribute("cursos", cursos);
         
-        Carrito carrito = (Carrito)session.getAttribute("carrito");
-        if(carrito== null)
-        {
-            carrito = new Carrito();
-            session.setAttribute("carrito", carrito);
-        }
-        if(carrito.getServicios() == null){
-            carrito.setServicios(new ArrayList<ServicioCarrito>());
-        }
+        Carrito carrito = SessionUtil.getCarritoSession(session);
         model.addAttribute("servicios", carrito.getServicios());
         return "cursos";
     }
     @PostMapping("/cursos")
     public String FiltraCursoByCategoria(@RequestParam(value = "categorias[]", required=false) int[] cats ,@RequestParam("nombrecurso") String cursoName,Model model,HttpSession session) {
+        Carrito carrito = SessionUtil.getCarritoSession(session);
         List<Curso> cur = cursoServicio.listarCursosCategoria();
         if(cats != null && cursoName.isEmpty()){
             cur = cursoServicio.filtrarCursosByCategorias(cats);
@@ -69,15 +63,7 @@ public class ControllerCurso {
         List<Categoria> categorias = categoriaServicio.listarCategorias();
         model.addAttribute("categorias", categorias);
         model.addAttribute("cursos", cur);
-        Carrito carrito = (Carrito)session.getAttribute("carrito");
-        if(carrito== null)
-        {
-            carrito = new Carrito();
-            session.setAttribute("carrito", carrito);
-        }
-        if(carrito.getServicios() == null){
-            carrito.setServicios(new ArrayList<ServicioCarrito>());
-        }
+        
         model.addAttribute("servicios", carrito.getServicios());
         return "cursos";
     }

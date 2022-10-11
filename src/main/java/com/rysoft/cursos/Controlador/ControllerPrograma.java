@@ -5,12 +5,13 @@
 package com.rysoft.cursos.Controlador;
 
 
+import com.rysoft.cursos.Controlador.Util.SessionUtil;
+import com.rysoft.cursos.Entidades.Carrito;
+import com.rysoft.cursos.Entidades.ProgramasCursos;
+import com.rysoft.cursos.Entidades.ServicioCarrito;
 import com.rysoft.cursos.Interfaces.ICursoService;
 import com.rysoft.cursos.Interfaces.IProgramaService;
 import com.rysoft.cursos.Modelos.Programa;
-import com.rysoft.cursos.entidades.Carrito;
-import com.rysoft.cursos.entidades.ProgramasCursos;
-import com.rysoft.cursos.entidades.ServicioCarrito;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,7 @@ public class ControllerPrograma {
 
     @GetMapping("/programas")
     public String Home(Model model,HttpSession session) {
+        Carrito carrito = SessionUtil.getCarritoSession(session);
         List<ProgramasCursos> programasCursos = new ArrayList<ProgramasCursos>();
         List<Programa> programas = programaServicio.listarProgramas();
 
@@ -50,15 +52,7 @@ public class ControllerPrograma {
             programasCursos.add(pc);
         });
         model.addAttribute("programas", programasCursos);
-        Carrito carrito = (Carrito)session.getAttribute("carrito");
-        if(carrito== null)
-        {
-            carrito = new Carrito();
-            session.setAttribute("carrito", carrito);
-        }
-        if(carrito.getServicios() == null){
-            carrito.setServicios(new ArrayList<ServicioCarrito>());
-        }
+        
         model.addAttribute("servicios", carrito.getServicios());
         return "programas";
     }
@@ -66,15 +60,7 @@ public class ControllerPrograma {
     @GetMapping("/programa")
     public String ProgramaInfo(/*@RequestParam(value="id") int id, Model model*/Model model,HttpSession session) {
         //model.addAttribute("programa",programa);
-        Carrito carrito = (Carrito)session.getAttribute("carrito");
-        if(carrito== null)
-        {
-            carrito = new Carrito();
-            session.setAttribute("carrito", carrito);
-        }
-        if(carrito.getServicios() == null){
-            carrito.setServicios(new ArrayList<ServicioCarrito>());
-        }
+        Carrito carrito = SessionUtil.getCarritoSession(session);
         model.addAttribute("servicios", carrito.getServicios());
         return "programa";
     }

@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.rysoft.cursos.Entidades.Carrito;
+import com.rysoft.cursos.Entidades.ServicioCarrito;
 import com.rysoft.cursos.InterfaceModelos.IMembresia;
 import com.rysoft.cursos.Interfaces.ICursoService;
 import com.rysoft.cursos.Interfaces.IMembresiaService;
@@ -17,8 +19,7 @@ import com.rysoft.cursos.Interfaces.IProgramaService;
 import com.rysoft.cursos.Modelos.Curso;
 import com.rysoft.cursos.Modelos.Membresia;
 import com.rysoft.cursos.Modelos.Programa;
-import com.rysoft.cursos.entidades.Carrito;
-import com.rysoft.cursos.entidades.ServicioCarrito;
+import com.rysoft.cursos.Controlador.Util.SessionUtil;
 
 @Controller
 public class ControllerCarrito {
@@ -39,13 +40,8 @@ public class ControllerCarrito {
     @GetMapping("/agregarItemCarrito")
     public String agregarItem(@RequestParam("idProducto") int idProducto,@RequestParam("tipoServicio") int tipoServicio,HttpSession session,Model model)
     {
-        System.out.println("Entre!");
-        Carrito carrito = (Carrito)session.getAttribute("carrito");
-        if(carrito== null)
-        {
-            carrito = new Carrito();
-            session.setAttribute("carrito", carrito);
-        }
+       
+        Carrito carrito = SessionUtil.getCarritoSession(session);
         ServicioCarrito servicioCarrito = new ServicioCarrito();
         if(tipoServicio == 1){
             Curso curso = cursoServicio.findCursoById(idProducto);
@@ -72,14 +68,9 @@ public class ControllerCarrito {
             servicioCarrito.setFotoServicio(programa.getFoto_programa());
         }
         
-        if(carrito.getServicios() == null){
-            carrito.setServicios(new ArrayList<ServicioCarrito>());
-            carrito.getServicios().add(servicioCarrito);
-        }
-        else{
-            carrito.getServicios().add(servicioCarrito);
-        }
-        System.out.println(carrito.getServicios().size());
+        //carrito.getServicios().add(servicioCarrito);
+        SessionUtil.agregarServicioCarrito(session, servicioCarrito);
+        
         session.setAttribute("servicios", carrito.getServicios());
         model.addAttribute("servicios", carrito.getServicios());
         return "vistasParciales/modalCarrito";

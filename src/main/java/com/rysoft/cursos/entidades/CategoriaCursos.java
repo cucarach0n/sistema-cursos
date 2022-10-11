@@ -1,4 +1,4 @@
-package com.rysoft.cursos.entidades;
+package com.rysoft.cursos.Entidades;
 
 import java.util.List;
 

@@ -140,29 +140,43 @@ for (i = 0; i < acc.length; i++) {
       this.events();
     }
   }
+  
   events() {
+    
     this.buttons.forEach(button => {
       button.addEventListener('click', e => {
         
         e.preventDefault();
-        console.log(button.getAttribute('href'));
+        //console.log(button.getAttribute('href'));
+        function actualizarCarritoModal(data){
+          let modal = document.querySelector("#modal-cart");
+          console.log(modal.children[0].children[1]);
+          
+          let doc = new DOMParser().parseFromString(data, "text/html");
+          console.log(doc.body.children[0].children[0].children[1].children[0]);
 
+          /*modal.innerHTML = "";
+          modal.appendChild(doc.body.children[0].children[0].children[0]);*/
+          modal.children[0].children[1].innerHTML = '';
+          modal.children[0].children[1].appendChild(doc.body.children[0].children[0].children[1].children[0]);
+        }
         fetch("http://localhost:8080"+button.getAttribute('href')).then(function(response) {
           return response.text();
-        }).then(function(data) {
-          console.log(data);
-        }).catch(function(error) {
+        }).then(data => actualizarCarritoModal(data)).catch(function(error) {
           console.log(error);
         });
-
+        
+       
         this.modal.classList.add('show');
       });
     });
     this.modal.querySelector('.modal-button-close').addEventListener('click', () => {
+      console.log('cerrar');
       this.modal.classList.remove('show');
     });
     this.modal.addEventListener('click', e => {
       if(e.target.classList.contains('modal')) {
+        
         this.modal.classList.remove('show');
       }
     })

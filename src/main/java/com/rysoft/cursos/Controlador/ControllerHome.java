@@ -1,6 +1,10 @@
 package com.rysoft.cursos.Controlador;
 
 
+import com.rysoft.cursos.Controlador.Util.SessionUtil;
+import com.rysoft.cursos.Entidades.Carrito;
+import com.rysoft.cursos.Entidades.CategoriaCursos;
+import com.rysoft.cursos.Entidades.ProgramasCursos;
 import com.rysoft.cursos.Interfaces.ICategoriaService;
 import com.rysoft.cursos.Interfaces.ICursoService;
 import com.rysoft.cursos.Interfaces.IProgramaService;
@@ -10,11 +14,12 @@ import com.rysoft.cursos.Modelos.Categoria;
 import com.rysoft.cursos.Modelos.Curso;
 import com.rysoft.cursos.Modelos.Inscripciones;
 import com.rysoft.cursos.Modelos.Programa;
-import com.rysoft.cursos.entidades.CategoriaCursos;
-import com.rysoft.cursos.entidades.ProgramasCursos;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -37,8 +42,9 @@ public class ControllerHome {
 
     //private ICursoService service1;
     @GetMapping("/")
-    public String Home(Model model)
+    public String Home(Model model,HttpSession session)
     {
+        Carrito carrito = SessionUtil.getCarritoSession(session);
         List<Curso> cursos = cursoServicio.listarCursosCategoria();
         List<Categoria> categorias = categoriaServicio.listarCategoriasLimite(2);
         List<CategoriaCursos> categoriasCursos = new ArrayList<CategoriaCursos>();
@@ -70,6 +76,7 @@ public class ControllerHome {
         model.addAttribute("cursos", cursos);
         model.addAttribute("categoriasCursos", categoriasCursos);
         model.addAttribute("programas", programasCursos);
+        model.addAttribute("servicios", carrito.getServicios());
         return "index";
     }
     
@@ -79,15 +86,15 @@ public class ControllerHome {
                              @RequestParam("celular") String celular,
                              @RequestParam("email") String email,
                              @RequestParam("curso") String curso,
-                             Model model){
-        
+                             Model model, HttpSession session){
+        Carrito carrito = SessionUtil.getCarritoSession(session);
         List<Curso> cursosList = cursoServicio.listarCursosCategoria();
         Inscripciones p = new Inscripciones(nombres,apellidos,celular,email,buscarCurs(cursosList,curso));
         InscripcionesServicio.Guardar(p);
         List<Categoria> categorias = categoriaServicio.listarCategorias();
         model.addAttribute("categorias", categorias);
         model.addAttribute("cursos", cursosList);
-        
+        model.addAttribute("servicios", carrito.getServicios());
         return "index";
         
     }

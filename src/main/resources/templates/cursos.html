@@ -20,7 +20,7 @@
     </head>
     <body>
         <!-- Modal Inicio sesion Registro-->
-        <div th:insert="menu::#modal-login"></div>
+        <div th:replace="menu::#modal-login"></div>
         <!-- End Modal Inicio sesion Registro-->
         <div class="fixed-actions">
             <div class="container">
@@ -35,11 +35,11 @@
         </div>
 
         <!-- Modal Cart-->
-        <div th:insert="menu::#modal-cart"></div>
+        <div th:replace="menu::#modal-cart"></div>
         <!-- End Modal Cart-->
 
         <!-- Header -->
-        <div th:insert="menu :: #headerInicio"></div>
+        <div th:replace="menu :: #headerInicio"></div>
         <!-- End Header -->
 
         <main>
@@ -132,7 +132,7 @@
                                         <i class="far fa-clock"></i>
                                         <span th:text="${#numbers.formatDecimal(curs.dur_curso, 0,0)} +' horas'">22 horas</span>
                                     </p>
-
+                                    
                                     <p class="price">
                                         <span th:text="${'S/ ' + #numbers.formatDecimal(curs.prec_curso + descuento, 0,0)}">S/ 279</span>
                                         <span th:text="${'S/ ' + #numbers.formatDecimal(curs.prec_curso, 0,0)}">S/ 237</span>
@@ -157,7 +157,7 @@
             </div><!-- .container -->
         </main>
 
-        <div th:insert="menu :: #footer_inicio"></div>
+        <div th:replace="menu :: #footer_inicio"></div>
 
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>

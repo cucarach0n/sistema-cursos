@@ -1,4 +1,4 @@
-package com.rysoft.cursos.entidades;
+package com.rysoft.cursos.Entidades;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ public class Carrito {
     public String fecha_compra_carrito;
     public String metodo_pago_carrito;
     public Float monto_total_carrito;
+    public int cant_servicios_carrito;
     public Float dsco_carrito;
     public Integer act_carrito;
     public Integer id_usuario;
@@ -72,5 +73,11 @@ public class Carrito {
     }
     public void setServicios(List<ServicioCarrito> servicios) {
         this.servicios = servicios;
+    }
+    public int getCant_servicios_carrito() {
+        return cant_servicios_carrito;
+    }
+    public void setCant_servicios_carrito(int cant_servicios_carrito) {
+        this.cant_servicios_carrito = cant_servicios_carrito;
     }
 }

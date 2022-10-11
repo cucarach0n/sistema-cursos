@@ -20,7 +20,7 @@
 </head>
 <body>
   <!-- Modal Inicio sesion Registro-->
-  <div th:insert="menu::#modal-login"></div>
+  <div th:replace="menu::#modal-login"></div>
   <!-- End Modal Inicio sesion Registro-->
 
   <div class="fixed-actions">
@@ -36,7 +36,7 @@
   </div>
 
   <!-- Modal Cart-->
-  <div th:insert="menu::#modal-cart"></div>
+  <div th:replace="menu::#modal-cart"></div>
   <!-- End Modal Cart-->
 
   <!-- Contador regresivo -->
@@ -60,7 +60,7 @@
   <!-- Fin contador regresivo -->
   
   <!-- Header -->
-  <div th:insert="menu :: #headerInicio"></div>
+  <div th:replace="menu :: #headerInicio"></div>
   <!-- End Header -->
   <main>
 
@@ -335,7 +335,7 @@
 
   </main>
 
-  <div th:insert="menu :: #footer_inicio"></div>
+  <div th:replace="menu :: #footer_inicio"></div>
 
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>

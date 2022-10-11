@@ -1,4 +1,4 @@
-package com.rysoft.cursos.entidades;
+package com.rysoft.cursos.Entidades;
 
 public class ProgramasCursos {
     public int id_programa;

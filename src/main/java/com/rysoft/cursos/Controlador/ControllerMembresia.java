@@ -14,10 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.rysoft.cursos.Controlador.Util.SessionUtil;
+import com.rysoft.cursos.Entidades.Carrito;
+import com.rysoft.cursos.Entidades.ServicioCarrito;
 import com.rysoft.cursos.Interfaces.IMembresiaService;
 import com.rysoft.cursos.Modelos.Membresia;
-import com.rysoft.cursos.entidades.Carrito;
-import com.rysoft.cursos.entidades.ServicioCarrito;
 
 @Controller
 public class ControllerMembresia {
@@ -28,15 +29,8 @@ public class ControllerMembresia {
     public String Home(Model model,HttpSession session) {
         List<Membresia> membresias = membresiaService.listarMembresias();
 
-        Carrito carrito = (Carrito)session.getAttribute("carrito");
-        if(carrito== null)
-        {
-            carrito = new Carrito();
-            session.setAttribute("carrito", carrito);
-        }
-        if(carrito.getServicios() == null){
-            carrito.setServicios(new ArrayList<ServicioCarrito>());
-        }
+        Carrito carrito = SessionUtil.getCarritoSession(session);
+
         model.addAttribute("servicios", carrito.getServicios());
         model.addAttribute("membresias", membresias);
 
@@ -46,15 +40,7 @@ public class ControllerMembresia {
     @GetMapping("/membership")
     public String MembresiaInfo(/*@RequestParam(value="id") int id, Model model*/Model model,HttpSession session) {
         //model.addAttribute("membrecia",membrecia);
-        Carrito carrito = (Carrito)session.getAttribute("carrito");
-        if(carrito== null)
-        {
-            carrito = new Carrito();
-            session.setAttribute("carrito", carrito);
-        }
-        if(carrito.getServicios() == null){
-            carrito.setServicios(new ArrayList<ServicioCarrito>());
-        }
+        Carrito carrito = SessionUtil.getCarritoSession(session);
         model.addAttribute("servicios", carrito.getServicios());
         return "membership";
     }

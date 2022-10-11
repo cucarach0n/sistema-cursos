@@ -237,7 +237,7 @@
       <!-- Contanido modal -->
       <div>
         <h2>Tu carrito de compras</h2>
-        <p style="font-size: 16px !important; margin: .2rem 0 1.1rem 0;">Tienes 4 items en tu carrito</p>
+        <p style="font-size: 16px !important; margin: .2rem 0 1.1rem 0;" th:text="'Tienes ' + ${#session.getAttribute('carrito').cant_servicios_carrito} + ' items en tu carrito'">Tienes 4 items en tu carrito</p>
         <div class="l-cart-modal__main">
           <div>
             <article th:each="servicio:${servicios}" class="cart-item">
@@ -257,7 +257,7 @@
             <div class="l-cart-modal__prices">
               <p>
                 <span>Subtotal</span>
-                <span>S/ 1674.00</span>
+                <span th:text="'S/. '+${#numbers.formatDecimal(#session.getAttribute('carrito').monto_total_carrito, 0,0)}">S/ 1674.00</span>
               </p>
               <p>
                 <span>Total</span>

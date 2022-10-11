@@ -1,4 +1,4 @@
-package com.rysoft.cursos.entidades;
+package com.rysoft.cursos.Entidades;
 
 public class ServicioCarrito {
     public Integer id_servicio;
