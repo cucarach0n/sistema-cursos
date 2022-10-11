@@ -1,6 +1,5 @@
 package com.rysoft.cursos.Controlador;
 
-
 import com.rysoft.cursos.Controlador.Util.SessionUtil;
 import com.rysoft.cursos.Entidades.Carrito;
 import com.rysoft.cursos.Entidades.CategoriaCursos;
@@ -14,9 +13,14 @@ import com.rysoft.cursos.Modelos.Categoria;
 import com.rysoft.cursos.Modelos.Curso;
 import com.rysoft.cursos.Modelos.Inscripciones;
 import com.rysoft.cursos.Modelos.Programa;
+import com.rysoft.cursos.Servicios.MailService;
+import java.net.MalformedURLException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.mail.MessagingException;
 
 import javax.servlet.http.HttpSession;
 
@@ -31,6 +35,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ControllerHome {
+
     @Autowired
     private ICursoService cursoServicio;
     @Autowired
@@ -39,11 +44,12 @@ public class ControllerHome {
     private IinscripcionesService InscripcionesServicio;
     @Autowired
     private IProgramaService programaServicio;
+    @Autowired
+    private MailService mailService;
 
     //private ICursoService service1;
     @GetMapping("/")
-    public String Home(Model model,HttpSession session)
-    {
+    public String Home(Model model, HttpSession session) {
         Carrito carrito = SessionUtil.getCarritoSession(session);
         List<Curso> cursos = cursoServicio.listarCursosCategoria();
         List<Categoria> categorias = categoriaServicio.listarCategoriasLimite(2);
@@ -64,7 +70,7 @@ public class ControllerHome {
             programasCursos.add(pc);
         });
 
-        categorias.forEach(categoria ->{
+        categorias.forEach(categoria -> {
             CategoriaCursos cc = new CategoriaCursos();
             cc.setId_categoria(categoria.getId_categoria());
             cc.setNom_categoria(categoria.getNom_categoria());
@@ -79,39 +85,70 @@ public class ControllerHome {
         model.addAttribute("servicios", carrito.getServicios());
         return "index";
     }
-    
+
     @RequestMapping(value = "/guardarIns", method = RequestMethod.POST)
-    public String guardarIns(@RequestParam("nombres") String nombres, 
-                             @RequestParam("apellidos") String apellidos,
-                             @RequestParam("celular") String celular,
-                             @RequestParam("email") String email,
-                             @RequestParam("curso") String curso,
-                             Model model, HttpSession session){
+    public String guardarIns(@RequestParam("nombres") String nombres,
+            @RequestParam("apellidos") String apellidos,
+            @RequestParam("celular") String celular,
+            @RequestParam("email") String email,
+            @RequestParam("curso") String curso,
+            Model model, HttpSession session) throws MessagingException, MalformedURLException {
         Carrito carrito = SessionUtil.getCarritoSession(session);
         List<Curso> cursosList = cursoServicio.listarCursosCategoria();
-        Inscripciones p = new Inscripciones(nombres,apellidos,celular,email,buscarCurs(cursosList,curso));
-        InscripcionesServicio.Guardar(p);
+        if (chkNamVldFnc(nombres) && chkNamVldFnc(apellidos) && chkMailVldFnc(email) && chkPhonVldFnc(celular)) {//Error al validar email, ver en la funcion validacion, Resposable: Dilam Chuquilin
+            Inscripciones p = new Inscripciones(nombres,
+                    apellidos,
+                    celular,
+                    email,
+                    ControllerCurso.buscarCurs(cursosList, curso));
+            InscripcionesServicio.Guardar(p);
+            mailService.sendEmail(p.email, "Inscripcion registrada", p.toString());
+        } else {
+            System.out.println("Error en la validacion");
+        }
         List<Categoria> categorias = categoriaServicio.listarCategorias();
         model.addAttribute("categorias", categorias);
         model.addAttribute("cursos", cursosList);
         model.addAttribute("servicios", carrito.getServicios());
         return "index";
-        
+
     }
-    
+
     @GetMapping("/terminos")
-    public String Terminos()
-    {
+    public String Terminos() {
         return "termns";
     }
-     private Curso buscarCurs(List<Curso> cursos, String buscado) {
-        Curso c= new Curso();
+
+    private Curso buscarCurs(List<Curso> cursos, String buscado) {
+        Curso c = new Curso();
         for (int i = 0; i < cursos.size(); i++) {
-            if ( buscado.equals( cursos.get(i).getNom_curso() ) ) {
+            if (buscado.equals(cursos.get(i).getNom_curso())) {
                 c = cursos.get(i);
                 break;
             }
         }
-         return c;
+        return c;
     }
+
+    public static boolean chkNamVldFnc(String namVar) {
+        String namRegExpVar = "^[A-Z][a-z]{2,}(?: [A-Z][a-z]*)*$";
+        Pattern pVar = Pattern.compile(namRegExpVar);
+        Matcher mVar = pVar.matcher(namVar);
+        return mVar.matches();
+    }
+
+    public static boolean chkMailVldFnc(String mailVar) {
+        String namRegExpVar = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+        Pattern pVar = Pattern.compile(namRegExpVar);
+        Matcher mVar = pVar.matcher(mailVar);
+        return mVar.matches();
+    }
+
+    public static boolean chkPhonVldFnc(String phonVar) {
+        String namRegExpVar = "^(\\+\\d{1,3}( )?)?((\\(\\d{1,3}\\))|\\d{1,3})[- .]?\\d{3,4}[- .]?\\d{4}$";
+        Pattern pVar = Pattern.compile(namRegExpVar);
+        Matcher mVar = pVar.matcher(phonVar);
+        return mVar.matches();
+    }
+
 }

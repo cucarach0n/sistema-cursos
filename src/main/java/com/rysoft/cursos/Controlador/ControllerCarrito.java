@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.rysoft.cursos.Entidades.Carrito;
@@ -33,11 +34,13 @@ public class ControllerCarrito {
     private IMembresiaService membresiaServicio;
     
     @GetMapping("/carrito")
-    public String Home()
+    public String Home(HttpSession session,Model model)
     {
+        Carrito carrito = SessionUtil.getCarritoSession(session);
+        model.addAttribute("carrito", carrito);
         return "carrito";
     }
-    @GetMapping("/agregarItemCarrito")
+    @PostMapping("/agregarItemCarrito")
     public String agregarItem(@RequestParam("idProducto") int idProducto,@RequestParam("tipoServicio") int tipoServicio,HttpSession session,Model model)
     {
        
@@ -49,6 +52,7 @@ public class ControllerCarrito {
             servicioCarrito.setNombreServicio(curso.getNom_curso());
             servicioCarrito.setPrecioServicio(curso.getPrec_curso());
             servicioCarrito.setTipoServicio(1);
+            servicioCarrito.setDescServicio(curso.getDescto_curso());
             servicioCarrito.setFotoServicio(curso.getFoto_curso());
         }
         else if(tipoServicio == 2){
@@ -57,14 +61,17 @@ public class ControllerCarrito {
             servicioCarrito.setNombreServicio(membresia.getNom_membresia());
             servicioCarrito.setPrecioServicio(membresia.getPrec_membresia());
             servicioCarrito.setTipoServicio(2);
+            servicioCarrito.setDescServicio(membresia.getDscto_membresia());
             servicioCarrito.setFotoServicio(membresia.getFoto_membresia());
         }
         else if(tipoServicio == 3){
+            System.out.println("Programa");
             Programa programa = programaServicio.findProgramaById(idProducto);
             servicioCarrito.setId_servicio(programa.getId_programa());
             servicioCarrito.setNombreServicio(programa.getNom_programa());
             servicioCarrito.setPrecioServicio(programa.getPrec_programa());
             servicioCarrito.setTipoServicio(3);
+            servicioCarrito.setDescServicio(programa.getDescu_programa());
             servicioCarrito.setFotoServicio(programa.getFoto_programa());
         }
         

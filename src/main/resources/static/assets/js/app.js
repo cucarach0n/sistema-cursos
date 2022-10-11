@@ -160,7 +160,14 @@ for (i = 0; i < acc.length; i++) {
           modal.children[0].children[1].innerHTML = '';
           modal.children[0].children[1].appendChild(doc.body.children[0].children[0].children[1].children[0]);
         }
-        fetch("http://localhost:8080"+button.getAttribute('href')).then(function(response) {
+        let formularioServicioData = new FormData();
+        formularioServicioData.append("idProducto", button.getAttribute('data-idproducto'));
+        formularioServicioData.append("tipoServicio", button.getAttribute('data-tiposervicio'));
+        console.log(button.dataset.idproducto);
+        fetch("http://localhost:8080/agregarItemCarrito",{
+          method: 'POST',
+          body: formularioServicioData
+        }).then(function(response) {
           return response.text();
         }).then(data => actualizarCarritoModal(data)).catch(function(error) {
           console.log(error);

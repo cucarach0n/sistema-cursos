@@ -134,13 +134,13 @@
                                     </p>
                                     
                                     <p class="price">
-                                        <span th:text="${'S/ ' + #numbers.formatDecimal(curs.prec_curso + descuento, 0,0)}">S/ 279</span>
-                                        <span th:text="${'S/ ' + #numbers.formatDecimal(curs.prec_curso, 0,0)}">S/ 237</span>
+                                        <span th:text="${'S/ ' + #numbers.formatDecimal(curs.prec_curso , 0,0)}">S/ 279</span>
+                                        <span th:text="${'S/ ' + #numbers.formatDecimal(curs.prec_curso - descuento, 0,0)}">S/ 237</span>
                                     </p>
                                 </div>
 
                                 <div class="card__buttons">
-                                    <a class="btn btn--outline btn--outline-primary btn--rounded" th:href="@{/agregarItemCarrito(idProducto=${curs.id_curso},tipoServicio=1)}" data-modal="#modal-cart">
+                                    <a class="btn btn--outline btn--outline-primary btn--rounded" th:data-idproducto="${curs.id_curso}" th:data-tiposervicio="${1}" th:href="@{/agregarItemCarrito(idProducto=${curs.id_curso},tipoServicio=1)}" data-modal="#modal-cart">
                                         <i class="fa fa-shopping-cart"></i>
                                     </a>
                                     <a class="btn btn--outline btn--outline-primary btn--full" href="comprar-ahora.html">

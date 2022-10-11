@@ -18,13 +18,13 @@ import lombok.Data;
  *
  * @author USER
  */
-
 @Data
 @Entity
-@Table(name="Inscripciones")
+@Table(name = "Inscripciones")
 public class Inscripciones {
+
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int id_inscripcion;
     public String nombres;
     public String apellidos;
@@ -41,8 +41,18 @@ public class Inscripciones {
         this.email = email;
         this.curso = curso;
     }
-    
+
     @ManyToOne()
-    @JoinColumn(name="id_curso")
+    @JoinColumn(name = "id_curso")
     private Curso curso;
+
+    @Override
+    public String toString() {
+        return "<html><body>" + "<h1>Cursos Rysoft</h1>"
+                + "<p>Usted <b>" + this.nombres + " " + this.apellidos + "</b> Se intereso por el curso de: </p>"
+                + "<p><b>Curso: </b> " + this.curso.nom_curso + "</p>"
+                + "<p><b>Precio: </b> " + this.curso.prec_curso + "</p>"
+                + "<img src='" + this.curso.foto_curso + "'>"
+                + "</body></html>";
+    }
 }

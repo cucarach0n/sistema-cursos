@@ -13,6 +13,10 @@ public class SessionUtil {
         if(carrito== null)
         {
             carrito = new Carrito();
+            carrito.setMonto_total_carrito(0f);
+            carrito.setMonto_subtotal_carrito(0f);
+            carrito.setDsco_carrito(0f);
+            carrito.setCant_servicios_carrito(0);
             session.setAttribute("carrito", carrito);
         }
         if(carrito.getServicios() == null){
@@ -24,18 +28,27 @@ public class SessionUtil {
         Carrito carrito = getCarritoSession(session);
         boolean existe = false;
         float montoTotal = 0;
+        float subTotal = 0;
+        float descuento = 0;
         for(ServicioCarrito s : carrito.getServicios()){
-            if(s.getId_servicio() == servicio.getId_servicio()){
+            if(s.getId_servicio() == servicio.getId_servicio() && s.getTipoServicio() == servicio.getTipoServicio()){
                 existe = true;
             }
-            montoTotal += s.getPrecioServicio();
+            descuento = (s.getPrecioServicio() * (s.getDescServicio() * 0.01f));
+            subTotal += s.getPrecioServicio();
+            montoTotal +=  s.getPrecioServicio() - descuento;
+            
         }
         if(existe){
             return;
         }
-        
+        //${#numbers.formatDecimal(curs.prec_curso, 0,0)} * (${#numbers.formatDecimal(curs.descto_curso, 0,0)} * 0.01)
+        descuento = (servicio.getPrecioServicio() * (servicio.getDescServicio() * 0.01f));
+        servicio.setPrecioFinalServicio(servicio.getPrecioServicio() - descuento);
         carrito.getServicios().add(servicio);
         carrito.setCant_servicios_carrito(carrito.getServicios().size());
-        carrito.setMonto_total_carrito(montoTotal + servicio.getPrecioServicio());
+        
+        carrito.setMonto_subtotal_carrito(subTotal  + servicio.getPrecioServicio());
+        carrito.setMonto_total_carrito(montoTotal + ( servicio.getPrecioServicio() - descuento));
     }
 }

@@ -7,6 +7,7 @@ public class Carrito {
     public String fecha_compra_carrito;
     public String metodo_pago_carrito;
     public Float monto_total_carrito;
+    public Float monto_subtotal_carrito;
     public int cant_servicios_carrito;
     public Float dsco_carrito;
     public Integer act_carrito;
@@ -79,5 +80,11 @@ public class Carrito {
     }
     public void setCant_servicios_carrito(int cant_servicios_carrito) {
         this.cant_servicios_carrito = cant_servicios_carrito;
+    }
+    public Float getMonto_subtotal_carrito() {
+        return monto_subtotal_carrito;
+    }
+    public void setMonto_subtotal_carrito(Float monto_subtotal_carrito) {
+        this.monto_subtotal_carrito = monto_subtotal_carrito;
     }
 }

@@ -5,6 +5,8 @@ public class ServicioCarrito {
     public Integer tipoServicio;//1: curso, 2: membresia, 3: programa
     public String nombreServicio;
     public Float precioServicio;
+    public Float descServicio;
+    public float precioFinalServicio;
     public String fotoServicio;
     public Integer getId_servicio() {
         return id_servicio;
@@ -35,5 +37,17 @@ public class ServicioCarrito {
     }
     public void setFotoServicio(String fotoServicio) {
         this.fotoServicio = fotoServicio;
+    }
+    public Float getDescServicio() {
+        return descServicio;
+    }
+    public void setDescServicio(Float descServicio) {
+        this.descServicio = descServicio;
+    }
+    public float getPrecioFinalServicio() {
+        return precioFinalServicio;
+    }
+    public void setPrecioFinalServicio(float precioFinalServicio) {
+        this.precioFinalServicio = precioFinalServicio;
     }
 }

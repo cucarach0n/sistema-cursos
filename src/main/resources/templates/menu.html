@@ -85,22 +85,38 @@
       <a class="navbar__link" th:href="@{/membresias}">Membresía</a>
     </nav><!-- .navbar -->
 
-    <div class="site-header__actions">
+    <!--<div class="site-header__actions">
       <a class="shopping-cart" th:href="@{/carrito}">
         <span class="shopping-cart__badge">
           2
         </span>
         <i class="fa fa-shopping-cart"></i>
       </a>
-      <a class="login-icon" href="#"  data-modal="#modal-login"><!-- data-modal es cualquier selector para el modal -->
+      <a class="login-icon" href="#"  data-modal="#modal-login">
         <i class="far fa-user"></i>
       </a>
       <a href="#" class="btn btn--outline btn--outline-white" data-modal="#modal-login">Ingresar</a>
       <a href="#hero-formulario" class="btn btn--white">Informes</a>
-    </div>
+    </div>-->
+    <div th:replace="menu :: #carritoLogin"></div>
   </div><!-- .container -->
 </header><!-- .site-header -->
 
+<!--carrito y login-->
+<div id="carritoLogin" class="site-header__actions">
+  <a class="shopping-cart" th:href="@{/carrito}">
+    <span class="shopping-cart__badge" th:text="${#session.getAttribute('carrito') == null}? '0': ${#session.getAttribute('carrito').cant_servicios_carrito}">
+      2
+    </span>
+    <i class="fa fa-shopping-cart"></i>
+  </a>
+  <a class="login-icon" href="#"  data-modal="#modal-login"><!-- data-modal es cualquier selector para el modal -->
+    <i class="far fa-user"></i>
+  </a>
+  <a href="#" class="btn btn--outline btn--outline-white" data-modal="#modal-login">Ingresar</a>
+  <a href="#hero-formulario" class="btn btn--white">Informes</a>
+</div>  
+<!--fin carrito y login-->
 
 <!-- Modal Inicio sesion Registro -->
 <div class="modal" id="modal-login">
@@ -257,11 +273,11 @@
             <div class="l-cart-modal__prices">
               <p>
                 <span>Subtotal</span>
-                <span th:text="'S/. '+${#numbers.formatDecimal(#session.getAttribute('carrito').monto_total_carrito, 0,0)}">S/ 1674.00</span>
+                <span th:text="'S/. '+${#numbers.formatDecimal(#session.getAttribute('carrito').monto_subtotal_carrito, 0,0)}">S/ 1674.00</span>
               </p>
               <p>
                 <span>Total</span>
-                <span>S/ 1380.00</span>
+                <span th:text="'S/. '+${#numbers.formatDecimal(#session.getAttribute('carrito').monto_total_carrito, 0,0)}">S/ 1380.00</span>
               </p>
             </div>
             <a href="detalle-pago.html" class="cart-btn cart-btn--block">Comprar</a>

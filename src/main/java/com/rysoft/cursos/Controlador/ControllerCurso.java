@@ -4,7 +4,6 @@
  */
 package com.rysoft.cursos.Controlador;
 
-
 import com.rysoft.cursos.Interfaces.ICursoService;
 import com.rysoft.cursos.Controlador.Util.SessionUtil;
 import com.rysoft.cursos.Entidades.Carrito;
@@ -29,47 +28,59 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class ControllerCurso {
-    
+
     @Autowired
     private ICursoService cursoServicio;
     @Autowired
     private ICategoriaService categoriaServicio;
     //private ICursoService service1;
-   
+
     @GetMapping("/cursos")
-    public String Home(Model model,HttpSession session) {
+    public String Home(Model model, HttpSession session) {
         List<Curso> cursos = cursoServicio.listarCursosCategoria();
         List<Categoria> categorias = categoriaServicio.listarCategorias();
         model.addAttribute("categorias", categorias);
         model.addAttribute("cursos", cursos);
-        
+
         Carrito carrito = SessionUtil.getCarritoSession(session);
         model.addAttribute("servicios", carrito.getServicios());
         return "cursos";
     }
+
     @PostMapping("/cursos")
-    public String FiltraCursoByCategoria(@RequestParam(value = "categorias[]", required=false) int[] cats ,@RequestParam("nombrecurso") String cursoName,Model model,HttpSession session) {
+    public String FiltraCursoByCategoria(@RequestParam(value = "categorias[]", required = false) int[] cats, @RequestParam("nombrecurso") String cursoName, Model model, HttpSession session) {
         Carrito carrito = SessionUtil.getCarritoSession(session);
         List<Curso> cur = cursoServicio.listarCursosCategoria();
-        if(cats != null && cursoName.isEmpty()){
+        if (cats != null && cursoName.isEmpty()) {
             cur = cursoServicio.filtrarCursosByCategorias(cats);
-        }
-        else if(cats == null && !cursoName.isEmpty()){
+        } else if (cats == null && !cursoName.isEmpty()) {
             cur = cursoServicio.filtrarCursosByNombre(cursoName);
-        }
-        else if((cats != null && !cursoName.isEmpty())){
-            cur=cursoServicio.filtrarCursosByNombreCategoria(cats,cursoName);
+        } else if ((cats != null && !cursoName.isEmpty())) {
+            cur = cursoServicio.filtrarCursosByNombreCategoria(cats, cursoName);
         }
         List<Categoria> categorias = categoriaServicio.listarCategorias();
         model.addAttribute("categorias", categorias);
         model.addAttribute("cursos", cur);
-        
+
         model.addAttribute("servicios", carrito.getServicios());
         return "cursos";
     }
+
     @GetMapping("/course")
     public String CursoInfo(/*@RequestParam(value="id") int id, Model model*/) {
         //model.addAttribute("curso",curso);
         return "course";
     }
+
+    public static Curso buscarCurs(List<Curso> cursos, String buscado) {
+        Curso c = new Curso();
+        for (Curso curso : cursos) {
+            if (buscado.equals(curso.getNom_curso())) {
+                c = curso;
+                break;
+            }
+        }
+        return c;
+    }
+
 }
