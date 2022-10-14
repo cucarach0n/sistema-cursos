@@ -138,11 +138,11 @@
             <div class="slider-courses">
               <div class="l-grid-courses" >
                 <article class="card" th:each="curso: ${categoria.cursos}" th:with="descuento=${#numbers.formatDecimal(curso.prec_curso, 0,0)} * (${#numbers.formatDecimal(curso.descto_curso, 0,0)} * 0.01)">
-                  <a class="card__img" th:href="@{/course}"><!--(id=${curso.id})-->
+                  <a class="card__img" th:href="@{/curso(id=${curso.id_curso})}"><!--(id=${curso.id})-->
                     <img th:src="${curso.foto_curso}" alt="Imágen">
                   </a><!-- .card__img -->
                   <div class="card__body">
-                    <a th:href="@{/course}" style="text-decoration: none;">
+                    <a th:href="@{/curso(id=${curso.id_curso})}" style="text-decoration: none;">
                       <h4 class="card__title" th:text="${curso.nom_curso}">Excel Básico</h4>
                     </a>
                     <p>Por <strong>Jose Carlos Rivas</strong></p>
@@ -163,7 +163,7 @@
                       <a class="btn btn--outline btn--outline-primary btn--rounded" th:data-idproducto="${curso.id_curso}" th:data-tiposervicio="${1}" data-modal="#modal-cart">
                         <i class="fa fa-shopping-cart"></i>
                       </a>
-                      <a class="btn btn--outline btn--outline-primary btn--full" href="comprar-ahora.html">
+                      <a class="btn btn--outline btn--outline-primary btn--full" th:href="@{/carrito(idProducto=${curso.id_curso},tipoServicio=${1})}">
                         Comprar ahora
                       </a>
                     </div>
@@ -219,7 +219,7 @@
                       <a class="btn btn--outline btn--outline-primary btn--rounded" th:data-idproducto="${program.id_programa}" th:data-tiposervicio="${3}" data-modal="#modal-cart">
                         <i class="fa fa-shopping-cart"></i>
                       </a>
-                      <a class="btn btn--outline btn--outline-primary btn--full" href="comprar-ahora.html">
+                      <a class="btn btn--outline btn--outline-primary btn--full" th:href="@{/carrito(idProducto=${program.id_programa},tipoServicio=${3})}">>
                         Comprar ahora
                       </a>
                     </div>

@@ -16,7 +16,7 @@ import lombok.Data;
 public class Pregunta {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY) /* Autoincremental */
-    public int id_programa;
+    public int id_pregunta;
     public String pregunta_pregunta;
     public String respuesta_pregunta;
     public Integer act_programa;

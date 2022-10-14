@@ -30,12 +30,34 @@ INSERT INTO unidad(act_unidad,descripcion_unidad,fecha_creacion_unidad,nombre_un
 INSERT INTO unidad(act_unidad,descripcion_unidad,fecha_creacion_unidad,nombre_unidad,id_curso_contenido) VALUES(1,'en esta unidad aprenderas',now(),'Conociendo Microsoft Excel7',4);
 INSERT INTO unidad(act_unidad,descripcion_unidad,fecha_creacion_unidad,nombre_unidad,id_curso_contenido) VALUES(1,'en esta unidad aprenderas2',now(),'Conociendo Microsoft Excel8',4);
 
-insert into programa(act_programa,desc_programa,foto_programa,nom_programa,prec_programa,vigencia_programa) values(1,'Maneja datos y realiza gráficas, genera tablas dinámicas y ejecuta funciones que te permitan analizar datos1...','https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/BASICO.jpg.webp?itok=f6BeupXy','Programa de Especialista en Excel 1',242,4);
-insert into programa(act_programa,desc_programa,foto_programa,nom_programa,prec_programa,vigencia_programa) values(1,'Maneja datos y realiza gráficas, genera tablas dinámicas y ejecuta funciones que te permitan analizar datos2...','https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/BASICO.jpg.webp?itok=f6BeupXy','Programa de Especialista en Excel 2',123,1);
-insert into programa(act_programa,desc_programa,foto_programa,nom_programa,prec_programa,vigencia_programa) values(1,'Maneja datos y realiza gráficas, genera tablas dinámicas y ejecuta funciones que te permitan analizar datos3...','https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/BASICO.jpg.webp?itok=f6BeupXy','Programa de Especialista en Excel 3',321,2);
-insert into programa(act_programa,desc_programa,foto_programa,nom_programa,prec_programa,vigencia_programa) values(1,'Maneja datos y realiza gráficas, genera tablas dinámicas y ejecuta funciones que te permitan analizar datos4...','https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/BASICO.jpg.webp?itok=f6BeupXy','Programa de Especialista en Excel 4',333,5);
+insert into programa(act_programa,desc_programa,descu_programa,foto_programa,nom_programa,prec_programa,vigencia_programa) values(1,'Maneja datos y realiza gráficas, genera tablas dinámicas y ejecuta funciones que te permitan analizar datos1...',25,'https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/BASICO.jpg.webp?itok=f6BeupXy','Programa de Especialista en Excel 1',242,4);
+insert into programa(act_programa,desc_programa,descu_programa,foto_programa,nom_programa,prec_programa,vigencia_programa) values(1,'Maneja datos y realiza gráficas, genera tablas dinámicas y ejecuta funciones que te permitan analizar datos2...',23,'https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/BASICO.jpg.webp?itok=f6BeupXy','Programa de Especialista en Excel 2',123,1);
+insert into programa(act_programa,desc_programa,descu_programa,foto_programa,nom_programa,prec_programa,vigencia_programa) values(1,'Maneja datos y realiza gráficas, genera tablas dinámicas y ejecuta funciones que te permitan analizar datos3...',54,'https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/BASICO.jpg.webp?itok=f6BeupXy','Programa de Especialista en Excel 3',321,2);
+insert into programa(act_programa,desc_programa,descu_programa,foto_programa,nom_programa,prec_programa,vigencia_programa) values(1,'Maneja datos y realiza gráficas, genera tablas dinámicas y ejecuta funciones que te permitan analizar datos4...',14,'https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/BASICO.jpg.webp?itok=f6BeupXy','Programa de Especialista en Excel 4',333,5);
 
 insert into programa_curso(act_programa_curso,id_curso,id_programa) values(1,1,1);
 
 insert into membresia(act_membresia,desc_membresia,dscto_membresia,foto_membresia,nom_membresia,prec_membresia,tiempo_membresia,tipo_tiempo_membresia)
 values(1,"Con nuestra membresía anual estudia a tu ritmo con acompañamiento docente en nuestra plataforma virtual 24/7.",23,"https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/membresia-anual.jpg.webp?itok=8GEm9X9v","Membresia Anual",250,1,3);/*Dia =1,Mes = 2,Anio = 3*/
+
+insert into pregunta(act_programa,pregunta_pregunta,respuesta_pregunta) values(1,'¿Qué necesito para aprobar el curso1?','Debes resolver todas las evaluaciones y tener un promedio mayor a 13 antes de que pasen 30 días de iniciar el curso.1');
+insert into pregunta(act_programa,pregunta_pregunta,respuesta_pregunta) values(1,'¿Qué necesito para aprobar el curso2?','Debes resolver todas las evaluaciones y tener un promedio mayor a 13 antes de que pasen 30 días de iniciar el curso.2');
+insert into pregunta(act_programa,pregunta_pregunta,respuesta_pregunta) values(1,'¿Qué necesito para aprobar el curso3?','Debes resolver todas las evaluaciones y tener un promedio mayor a 13 antes de que pasen 30 días de iniciar el curso.3');
+insert into pregunta(act_programa,pregunta_pregunta,respuesta_pregunta) values(1,'¿Qué necesito para aprobar el curso4?','Debes resolver todas las evaluaciones y tener un promedio mayor a 13 antes de que pasen 30 días de iniciar el curso.4');
+insert into pregunta(act_programa,pregunta_pregunta,respuesta_pregunta) values(1,'¿Qué necesito para aprobar el curso5?','Debes resolver todas las evaluaciones y tener un promedio mayor a 13 antes de que pasen 30 días de iniciar el curso.5');
+insert into pregunta(act_programa,pregunta_pregunta,respuesta_pregunta) values(1,'¿Qué necesito para aprobar el curso6?','Debes resolver todas las evaluaciones y tener un promedio mayor a 13 antes de que pasen 30 días de iniciar el curso.6');
+
+insert into curso_pregunta(id_curso,id_pregunta) values (1,2);
+insert into curso_pregunta(id_curso,id_pregunta) values (1,1);
+
+insert into curso_pregunta(id_curso,id_pregunta) values (2,3);
+insert into curso_pregunta(id_curso,id_pregunta) values (2,2);
+
+insert into curso_pregunta(id_curso,id_pregunta) values (3,2);
+insert into curso_pregunta(id_curso,id_pregunta) values (3,4);
+
+insert into curso_pregunta(id_curso,id_pregunta) values (4,1);
+insert into curso_pregunta(id_curso,id_pregunta) values (4,2);
+
+
+

@@ -92,7 +92,7 @@
                 <a class="btn btn--outline btn--outline-primary btn--rounded" th:data-idproducto="${program.id_programa}" th:data-tiposervicio="${3}" data-modal="#modal-cart">
                   <i class="fa fa-shopping-cart"></i>
                 </a>
-                <a class="btn btn--outline btn--outline-primary btn--full" href="comprar-ahora.html">
+                <a class="btn btn--outline btn--outline-primary btn--full" th:href="@{/carrito(idProducto=${program.id_programa},tipoServicio=${3})}">
                   Comprar ahora
                 </a>
               </div>

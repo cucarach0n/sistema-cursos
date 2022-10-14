@@ -77,11 +77,12 @@ public class ControllerCurso {
     public String CursoInfo(@RequestParam(value="id") int id, Model model, HttpSession session) {
         Carrito carrito = SessionUtil.getCarritoSession(session);
         Curso curso = cursoServicio.findCursoById(id);
-        
+        List<Curso> cursos = cursoServicio.filtrarCursosByCategoria(curso.getCategoria().getId_categoria());
         //List<Unidad> unidades = unidadServicio.listarUnidadesPorContenido(curso.getId_curso());
         //model.addAttribute("curso",curso);
         model.addAttribute("servicios", carrito.getServicios());
         model.addAttribute("curso", curso);
+        model.addAttribute("cursosSugerencia", cursos);
         return "course";
     }
 

@@ -21,22 +21,23 @@ import com.rysoft.cursos.Modelos.Curso;
 import com.rysoft.cursos.Modelos.Membresia;
 import com.rysoft.cursos.Modelos.Programa;
 import com.rysoft.cursos.Controlador.Util.SessionUtil;
-
+import com.rysoft.cursos.Controlador.Util.CarritoUtil;
 @Controller
 public class ControllerCarrito {
     @Autowired
     private ICursoService cursoServicio;
-
-    @Autowired
-    private IProgramaService programaServicio;
-
     @Autowired
     private IMembresiaService membresiaServicio;
+    @Autowired
+    private IProgramaService programaServicio;
     
     @GetMapping("/carrito")
-    public String Home(HttpSession session,Model model)
+    public String Home(@RequestParam(value="idProducto", required = false) String idServicio,@RequestParam(value="tipoServicio", required = false) String tipoServicio,HttpSession session,Model model)
     {
         Carrito carrito = SessionUtil.getCarritoSession(session);
+        if(idServicio != null && !idServicio.isBlank()){      
+            SessionUtil.agregarServicioCarrito(session,CarritoUtil.obtenerServicio(Integer.parseInt(idServicio),Integer.parseInt(tipoServicio),cursoServicio,membresiaServicio,programaServicio));
+        }
         model.addAttribute("carrito", carrito);
         return "carrito";
     }
@@ -45,38 +46,9 @@ public class ControllerCarrito {
     {
        
         Carrito carrito = SessionUtil.getCarritoSession(session);
-        ServicioCarrito servicioCarrito = new ServicioCarrito();
-        if(tipoServicio == 1){
-            Curso curso = cursoServicio.findCursoById(idProducto);
-            servicioCarrito.setId_servicio(curso.getId_curso());
-            servicioCarrito.setNombreServicio(curso.getNom_curso());
-            servicioCarrito.setPrecioServicio(curso.getPrec_curso());
-            servicioCarrito.setTipoServicio(1);
-            servicioCarrito.setDescServicio(curso.getDescto_curso());
-            servicioCarrito.setFotoServicio(curso.getFoto_curso());
-        }
-        else if(tipoServicio == 2){
-            Membresia membresia = membresiaServicio.findMembresiaById(idProducto);
-            servicioCarrito.setId_servicio(membresia.getId_membresia());
-            servicioCarrito.setNombreServicio(membresia.getNom_membresia());
-            servicioCarrito.setPrecioServicio(membresia.getPrec_membresia());
-            servicioCarrito.setTipoServicio(2);
-            servicioCarrito.setDescServicio(membresia.getDscto_membresia());
-            servicioCarrito.setFotoServicio(membresia.getFoto_membresia());
-        }
-        else if(tipoServicio == 3){
-            System.out.println("Programa");
-            Programa programa = programaServicio.findProgramaById(idProducto);
-            servicioCarrito.setId_servicio(programa.getId_programa());
-            servicioCarrito.setNombreServicio(programa.getNom_programa());
-            servicioCarrito.setPrecioServicio(programa.getPrec_programa());
-            servicioCarrito.setTipoServicio(3);
-            servicioCarrito.setDescServicio(programa.getDescu_programa());
-            servicioCarrito.setFotoServicio(programa.getFoto_programa());
-        }
-        
+
         //carrito.getServicios().add(servicioCarrito);
-        SessionUtil.agregarServicioCarrito(session, servicioCarrito);
+        SessionUtil.agregarServicioCarrito(session, CarritoUtil.obtenerServicio(idProducto, tipoServicio,cursoServicio,membresiaServicio,programaServicio));
         
         session.setAttribute("servicios", carrito.getServicios());
         model.addAttribute("servicios", carrito.getServicios());
