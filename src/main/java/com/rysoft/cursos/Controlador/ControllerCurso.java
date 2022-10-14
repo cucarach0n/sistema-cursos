@@ -5,12 +5,16 @@
 package com.rysoft.cursos.Controlador;
 
 import com.rysoft.cursos.Interfaces.ICursoService;
+import com.rysoft.cursos.Interfaces.ICurso_contenidoService;
+import com.rysoft.cursos.Interfaces.IUnidadService;
 import com.rysoft.cursos.Controlador.Util.SessionUtil;
 import com.rysoft.cursos.Entidades.Carrito;
 import com.rysoft.cursos.Entidades.ServicioCarrito;
 import com.rysoft.cursos.Interfaces.ICategoriaService;
 import com.rysoft.cursos.Modelos.Categoria;
 import com.rysoft.cursos.Modelos.Curso;
+import com.rysoft.cursos.Modelos.Curso_contenido;
+import com.rysoft.cursos.Modelos.Unidad;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +37,9 @@ public class ControllerCurso {
     private ICursoService cursoServicio;
     @Autowired
     private ICategoriaService categoriaServicio;
+    @Autowired
+    private ICurso_contenidoService curso_contenidoServicio;
+
     //private ICursoService service1;
 
     @GetMapping("/cursos")
@@ -66,9 +73,15 @@ public class ControllerCurso {
         return "cursos";
     }
 
-    @GetMapping("/course")
-    public String CursoInfo(/*@RequestParam(value="id") int id, Model model*/) {
+    @GetMapping("/curso")
+    public String CursoInfo(@RequestParam(value="id") int id, Model model, HttpSession session) {
+        Carrito carrito = SessionUtil.getCarritoSession(session);
+        Curso curso = cursoServicio.findCursoById(id);
+        
+        //List<Unidad> unidades = unidadServicio.listarUnidadesPorContenido(curso.getId_curso());
         //model.addAttribute("curso",curso);
+        model.addAttribute("servicios", carrito.getServicios());
+        model.addAttribute("curso", curso);
         return "course";
     }
 

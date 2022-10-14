@@ -55,7 +55,7 @@
             </a>
           </li>
           <li>
-            <a href="course.html">
+            <a th:href="@{/curso?id=${curso.id_curso}}" th:text="${curso.nom_curso}">
               Excel Básico
             </a>
           </li>
@@ -64,42 +64,44 @@
       <div class="l-page-generic">
         <section class="l-page-generic__main">
           <!-- Course -->
-          <article class="card card--course-desc">
+          <article class="card card--course-desc" th:with="descuento=${#numbers.formatDecimal(curso.prec_curso, 0,0)} * (${#numbers.formatDecimal(curso.descto_curso, 0,0)} * 0.01)">
             <div class="card__img">
-              <iframe src="https://player.vimeo.com/video/512082463?app_id=122963" width="640" height="350" frameborder="0" allow="autoplay; fullscreen" data-ready="true"></iframe>
+              <iframe th:src="${curso.video_curso}" width="640" height="350" frameborder="0" allow="autoplay; fullscreen" data-ready="true"></iframe>
             </div><!-- .card__img -->
             <div class="card__body">
-              <h4 class="card__title">Excel Básico</h4>
+              <h4 class="card__title" th:text="${curso.nom_curso}">Excel Básico</h4>
               <p class="card__author">Por <strong>Jose Carlos Rivas</strong></p>
 
-              <p class="card__text">Con este curso podrás aplicar las operaciones y funcionalidades básicas de Excel para resolver problemas de cálculo y estadística a través de conocimientos del entorno y funciones de Excel para facilitar las resolución de distinto tipos de tareas.</p>
+              <p class="card__text" th:text="${curso.desc_curso}">Con este curso podrás aplicar las operaciones y funcionalidades básicas de Excel para resolver problemas de cálculo y estadística a través de conocimientos del entorno y funciones de Excel para facilitar las resolución de distinto tipos de tareas.</p>
               
               <div class="d-flex justify-content-between prices">
                 <div>
-                  <p class="discount">
+                  <p class="discount" th:text="${#numbers.formatDecimal(curso.descto_curso ,0,0) } +'% de dscto.'">
                     15% de dscto.
                   </p>
                 </div>
 
                 <p class="price">
-                  <span>S/ 279</span>
-                  <span>S/ 237</span>
+                  <span th:text="${'S/ ' + #numbers.formatDecimal(curso.prec_curso ,0,0) }">S/ 279</span>
+                  <span th:text="${'S/ ' + #numbers.formatDecimal(curso.prec_curso - descuento,0,0)}">S/ 237</span>
                 </p>
               </div>
 
               <div class="d-flex justify-content-between prices align-items-center course-icons">
-                <p>
+                <p >
                   <i class="far fa-clock"></i>
-                  22 horas
+                  <span th:text="${curso.horas_curso} + ' horas'">22</span>
                 </p>
 
                 <p>
                   <i class="fa fa-download"></i>
-                  72 materiales
+                  <span th:text="${curso.cantMateriales_curso} + ' materiales'">22</span>
+                  
                 </p>
 
                 <p>
                   <i class="far fa-star"></i>
+                  
                   4.2
                 </p>
               </div>
@@ -126,80 +128,27 @@
                 <div class="tabs-content">
                   <section id="contenido" class="tab-active">
                     <div class="accordion">
-                      <header>
-                        <h3>
-                          <strong>Módulo 1:</strong> Excel básico
-                        </h3>
-                      </header>
-                      <div class="panel course-desc">
-                        <p>Con este curso podrás aplicar las operaciones y funcionalidades básicas de Excel para resolver problemas de cálculo y estadística a través de conocimientos del entorno y funciones de Excel para facilitar las resolución de distinto tipos de tareas.</p>
-                        <h4>Unidades</h4>
-                        <ul>
-                          <li>Conociendo Microsoft Excel</li>
-                          <li>Funciones Matemáticas</li>
-                          <li>Funciones Matemáticas y de Fecha</li>
-                          <li>Herramientas de Análisis l</li>
-                          <li>Herramientas de Análisis lI</li>
-                          <li>Búsqueda, organización y gráficos</li>
-                        </ul>
-                        <div class="course-desc__foot">
-                          <p>22 horas</p>
-                          <p>25 videos</p>
-                          <p>6 evaluaciones</p>
-                          <p>75 materiales</p>
+                      <div th:each="contenido,status:${curso.contenidos}">
+                        <header>
+                          <h3>
+                            <strong th:text="'Módulo '+ ${status.count}" + ':'>Módulo 1:</strong> <span th:text="${contenido.nom_curso_contenido}">Excel básico</span>
+                          </h3>
+                        </header>
+                        <div class="panel course-desc">
+                          <p <span th:text="${contenido.desc_curso_contenido}">Con este curso podrás aplicar las operaciones y funcionalidades básicas de Excel para resolver problemas de cálculo y estadística a través de conocimientos del entorno y funciones de Excel para facilitar las resolución de distinto tipos de tareas.</p>
+                          <h4>Unidades</h4>
+                          <ul>
+                            <li th:each="unidad:${contenido.unidades}" th:text="${unidad.nombre_unidad}">Conociendo Microsoft Excel</li>
+                          </ul>
+                          <div class="course-desc__foot">
+                            <p th:text="${contenido.horas_contenido} + ' horas'">22 horas</p>
+                            <p th:text="${contenido.cantVideos_contenido} + ' videos'">25 videos</p>
+                            <p th:text="${contenido.cantEvaluaciones_contenido} + ' evaluaciones'"> 6 evaluaciones</p>
+                            <p th:text="${contenido.cantMateriales_contenido} + ' materiales'">75 materiales</p>
+                          </div>
                         </div>
                       </div>
-
-                      <header>
-                        <h3>
-                          <strong>Módulo 2:</strong> Excel intermedio
-                        </h3>
-                      </header>
-                      <div class="panel course-desc">
-                        <p>Aprende las opciones para crear tablas dinámicas, gráficos estadísticas avanzadas, validación de datos, funciones aleatorias, operaciones básicas de Ms. Access y optimiza los datos en un hoja de cálculo.</p>
-
-                        <h4>Unidades</h4>
-                        <ul>
-                          <li>Funciones Lógicas</li>
-                          <li>Funciones de texto</li>
-                          <li>Tablas</li>
-                          <li>Filtros avanzados</li>
-                          <li>Esquemas, subtotales y consolidación de datos</li>
-                          <li>Tablas y gráficos dinámicos</li>
-                        </ul>
-
-                        <div class="course-desc__foot">
-                          <p>22 horas</p>
-                          <p>25 videos</p>
-                          <p>6 evaluaciones</p>
-                          <p>75 materiales</p>
-                        </div>
-                      </div>
-
-                      <header>
-                        <h3>
-                          <strong>Módulo 1:</strong> Excel avanzado
-                        </h3>
-                      </header>
-                      <div class="panel course-desc">
-                        <p>Conoce las funciones de Base de Datos, fórmulas matriciales, uso de tablas y gráficos dinámicos. Comprende el análisis de diversos cálculos financieros, cómo realizar formularios y el uso de macros que permitirán solucionar diferentes tipos de problemas.</p>
-
-                        <ul>
-                          <li>Unidades</li>
-                          <li>Base de datos y Controles de Formulario</li>
-                          <li>Grabadora de Macros</li>
-                          <li>Editor de Visual Basic</li>
-                          <li>Herramientas de Análisis de Datos y Control de Calidad</li>
-                          <li>Operaciones Financieras</li>
-                          <li>Datos Internos y Externos</li>
-                        </ul>
-                        <div class="course-desc__foot">
-                          <p>22 horas</p>
-                          <p>25 videos</p>
-                          <p>6 evaluaciones</p>
-                          <p>75 materiales</p>
-                        </div>
-                      </div>
+                      
                     </div>
                   </section>
                   <section id="docente">

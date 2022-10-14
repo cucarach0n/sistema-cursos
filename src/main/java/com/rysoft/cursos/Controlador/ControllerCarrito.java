@@ -82,6 +82,14 @@ public class ControllerCarrito {
         model.addAttribute("servicios", carrito.getServicios());
         return "vistasParciales/modalCarrito";
     }
+    @GetMapping("/eliminarItemCarrito")
+    public String ElimirServicioItemCarrito(@RequestParam("idproducto") int idProducto,HttpSession session,Model model){
+        Carrito carrito = SessionUtil.getCarritoSession(session);
+        carrito.getServicios().removeIf(servicio -> servicio.getId_servicio() == idProducto);
+        carrito.setCant_servicios_carrito(carrito.getServicios().size());
+        model.addAttribute("carrito", carrito);
+        return "carrito";
+    }
     @GetMapping("/pago1")
     public String ProcesoPagoUno()
     {

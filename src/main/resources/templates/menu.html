@@ -261,13 +261,12 @@
               <div class="cart-item__body">
                 <h3 th:text="${servicio.nombreServicio}">Excel Básico</h3>
                 <div class="price" th:text="'S/. '+${#numbers.formatDecimal(servicio.precioServicio, 0,0)}">S/. 279.00</div>
-                <a href="" class="cart-item__delete">
+                <a href="#" th:onclick="|eliminarItem(${servicio.id_servicio},event,this)|" class="cart-item__delete">
                   <i class="fa fa-trash-alt"></i>
                 </a>
               </div>
             </article>
 
-            
           </div>
           <div>
             <div class="l-cart-modal__prices">
@@ -280,7 +279,7 @@
                 <span th:text="'S/. '+${#numbers.formatDecimal(#session.getAttribute('carrito').monto_total_carrito, 0,0)}">S/ 1380.00</span>
               </p>
             </div>
-            <a href="detalle-pago.html" class="cart-btn cart-btn--block">Comprar</a>
+            <a href="detalle-pago.html" th:href="@{/carrito}" class="cart-btn cart-btn--block">Comprar</a>
             <a href="#" class="link" onclick="document.getElementById('close-cart-modal').click(); return false;">
               Seguir comprando
               <i class="fa fa-arrow-right"></i>

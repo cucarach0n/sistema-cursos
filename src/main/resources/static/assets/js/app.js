@@ -150,20 +150,25 @@ for (i = 0; i < acc.length; i++) {
         //console.log(button.getAttribute('href'));
         function actualizarCarritoModal(data){
           let modal = document.querySelector("#modal-cart");
-          console.log(modal.children[0].children[1]);
+          let carritoLogin = document.querySelector("#carritoLogin");
+          //console.log(modal.children[0].children[1]);
           
           let doc = new DOMParser().parseFromString(data, "text/html");
-          console.log(doc.body.children[0].children[0].children[1].children[0]);
+          //console.log(doc.body.children[0].children[0].children[1].children[0]);
 
           /*modal.innerHTML = "";
           modal.appendChild(doc.body.children[0].children[0].children[0]);*/
           modal.children[0].children[1].innerHTML = '';
           modal.children[0].children[1].appendChild(doc.body.children[0].children[0].children[1].children[0]);
+          console.log(doc.body.children[1]);
+          carritoLogin.children[0].innerHTML = '';
+          carritoLogin.children[0].appendChild(doc.body.children[1].children[0]);
+          
         }
         let formularioServicioData = new FormData();
         formularioServicioData.append("idProducto", button.getAttribute('data-idproducto'));
         formularioServicioData.append("tipoServicio", button.getAttribute('data-tiposervicio'));
-        console.log(button.dataset.idproducto);
+        //console.log(button.dataset.idproducto);
         fetch("http://localhost:8080/agregarItemCarrito",{
           method: 'POST',
           body: formularioServicioData
@@ -246,3 +251,24 @@ new Modal('#modal-cart');
     setInterval(updateCountdown, MILLISECONDS_OF_A_SECOND);
   }
 });
+
+
+function eliminarItem(idProducto,e,element){
+  e.preventDefault();
+  console.log(idProducto);
+  fetch("http://localhost:8080/eliminarItemCarrito?idproducto=" + idProducto).then(function(response) {
+    return response.status;
+  }).then((status)=>{
+    if(status == 200){
+      element.parentElement.parentElement.remove();
+      let carritoBadge = document.querySelector(".shopping-cart__badge");
+      
+      let cantidad = parseInt(carritoBadge.innerText);
+      console.log(cantidad);
+      carritoBadge.innerText = cantidad - 1;
+    }
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+}
