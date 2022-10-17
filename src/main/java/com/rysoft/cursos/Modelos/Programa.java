@@ -4,10 +4,14 @@
  */
 package com.rysoft.cursos.Modelos;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
 
@@ -24,5 +28,14 @@ public class Programa {
     public String desc_programa;
     public String foto_programa;
     public Float vigencia_programa;
+
+    public String video_programa;
+
     public Integer act_programa;
+
+    @OneToMany(mappedBy ="programa", fetch = FetchType.LAZY)
+    private List<Programa_curso> cursos;
+
+    @OneToMany(mappedBy ="programa", fetch = FetchType.LAZY)
+    private List<Programa_pregunta> preguntas;
 }

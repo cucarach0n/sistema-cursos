@@ -55,7 +55,7 @@
             </a>
           </li>
           <li>
-            <a href="membership.html">
+            <a th:text="${membresia.nom_membresia}" th:href="@{/membresia(id=${membresia.id_membresia})}">
               Membresía Anual
             </a>
           </li>
@@ -64,13 +64,15 @@
       <div class="l-page-generic">
         <section class="l-page-generic__main">
           <!-- Course -->
-          <article class="card card--course-desc card--program">
+          <article class="card card--course-desc card--program" th:with="descuento=${#numbers.formatDecimal(membresia.prec_membresia, 0,0)} * (${#numbers.formatDecimal(membresia.dscto_membresia, 0,0)} * 0.01)">
             <div class="card__img">
-              <img src="https://www.zegelvirtual.com/sites/default/files/styles/imagemagick/public/hero-banner/banner-membresia.jpg.webp?itok=v3Y3JQVO" alt="Imágen">
-              <h3 class="card__img-title">¡Aprende sin limitaciones durante un año!</h3>
+              <img th:src="${membresia.foto_membresia}" alt="Imágen">
+              <h3 th:if="${membresia.tipoTiempo_membresia == 3}" th:text="'¡Aprende sin limitaciones durante '+${membresia.tiempo_membresia} +' año'" class="card__img-title">¡Aprende sin limitaciones durante un año!</h3>
+              <h3 th:if="${membresia.tipoTiempo_membresia == 2}" th:text="'¡Aprende sin limitaciones durante '+${membresia.tiempo_membresia} +' mes'" class="card__img-title">¡Aprende sin limitaciones durante un año!</h3>
+              <h3 th:if="${membresia.tipoTiempo_membresia == 1}" th:text="'¡Aprende sin limitaciones durante '+${membresia.tiempo_membresia} +' dias'" class="card__img-title">¡Aprende sin limitaciones durante un año!</h3>
             </div><!-- .card__img -->
             <div class="card__body">
-              <h4 class="card__title">Membresía Anual</h4>
+              <h4 th:text="${membresia.nom_membresia}" class="card__title">Membresía Anual</h4>
 
               <p style="font-weight: 700; font-size: 18px !important;">
                 <strong>
@@ -84,7 +86,7 @@
                 </strong>
               </p>
 
-              <p class="card__text">
+              <p th:text="${membresia.desc_membresia}" class="card__text">
                 +70 cursos virtuales<br>
                 8 Programas de especialización<br>
                 En las 10 categorías más importantes en el mundo de los negocios..
@@ -92,22 +94,22 @@
               
               <div class="d-flex justify-content-between prices">
                 <div>
-                  <p class="discount">
+                  <p th:text="${#numbers.formatDecimal(membresia.dscto_membresia, 0,0)} +'% de dscto.'" class="discount">
                     15% de dscto.
                   </p>
                 </div>
 
                 <p class="price">
-                  <span>S/ 279</span>
-                  <span>S/ 237</span>
+                  <span th:text="${'S/ ' + #numbers.formatDecimal(membresia.prec_membresia , 0,0)}">S/ 279</span>
+                  <span th:text="${'S/ ' + #numbers.formatDecimal(membresia.prec_membresia - descuento, 0,0)}">S/ 237</span>
                 </p>
               </div>
 
               <div class="card__buttons">
-                <a class="btn btn--outline btn--outline-primary btn--rounded" data-modal="#modal-cart" href="#">
+                <a class="btn btn--outline btn--outline-primary btn--rounded" th:data-idproducto="${membresia.id_membresia}" th:data-tiposervicio="${2}" data-modal="#modal-cart">
                   <i class="fa fa-shopping-cart"></i>
                 </a>
-                <a class="btn btn--outline btn--outline-primary btn--full" href="comprar-ahora.html">
+                <a class="btn btn--outline btn--outline-primary btn--full" th:href="@{/carrito(idProducto=${membresia.id_membresia},tipoServicio=${2})}">
                   Comprar ahora
                 </a>
               </div>
@@ -116,34 +118,22 @@
           <!-- End Course -->
           <div class="card card--linemap" style="margin-top: 30px;">
             <div class="card__body">
-              <div class="grid grid--membership">
-                <div class="col-12 col-md-4">
-                  <img src="https://www.zegelvirtual.com/sites/default/files/styles/imagemagick/public/beneficios-membresia/asesorias.jpg.webp?itok=aWD174p2" alt="">
+              <div th:each="beneficio,status: ${membresia.beneficios}" class="grid grid--membership">
+                <div th:if="${status.count % 2 != 0}" class="col-12 col-md-4">
+                  <img th:src="${beneficio.foto_beneficio}" alt="">
                 </div>
-                <div class="col-12 col-md-8 text">
-                  <h3>Asesoría Personalizada</h3>
-                  <p>Podrás contactarte con nuestros docentes a través del chat de consultas disponible las 24 horas y recibir asesoramiento de los Expertos.</p>
+                <div th:if="${status.count % 2 != 0}" class="col-12 col-md-8 text">
+                  <h3 th:text="${beneficio.nombre_beneficio}">Asesoría Personalizada</h3>
+                  <p th:text="${beneficio.desc_beneficio}">Podrás contactarte con nuestros docentes a través del chat de consultas disponible las 24 horas y recibir asesoramiento de los Expertos.</p>
                 </div>
-              </div>
 
-              <div class="grid grid--membership">
-                <div class="col-12 col-md-8 text" >
-                  <h3>Asesoría Personalizada</h3>
-                  <p>Podrás contactarte con nuestros docentes a través del chat de consultas disponible las 24 horas y recibir asesoramiento de los Expertos.</p>
+                <div th:if="${status.count % 2 == 0}" class="col-12 col-md-8 text">
+                   <h3 th:text="${beneficio.nombre_beneficio}">Asesoría Personalizada</h3>
+                    <p th:text="${beneficio.desc_beneficio}">Podrás contactarte con nuestros docentes a través del chat de consultas disponible las 24 horas y recibir asesoramiento de los Expertos.</p>
                 </div>
-                <div class="col-12 col-md-4">
-                  <img src="https://www.zegelvirtual.com/sites/default/files/styles/imagemagick/public/beneficios-membresia/asesorias.jpg.webp?itok=aWD174p2" alt="">
-                </div>
-              </div>
-
-              <div class="grid grid--membership">
-                <div class="col-12 col-md-4">
-                  <img src="https://www.zegelvirtual.com/sites/default/files/styles/imagemagick/public/beneficios-membresia/asesorias.jpg.webp?itok=aWD174p2" alt="">
-                </div>
-                <div class="col-12 col-md-8 text">
-                  <h3>Asesoría Personalizada</h3>
-                  <p>Podrás contactarte con nuestros docentes a través del chat de consultas disponible las 24 horas y recibir asesoramiento de los Expertos.</p>
-                </div>
+                <div th:if="${status.count % 2 == 0}" class="col-12 col-md-4">
+                  <img th:src="${beneficio.foto_beneficio}" alt="">
+                 </div>
               </div>
             </div>
           </div>

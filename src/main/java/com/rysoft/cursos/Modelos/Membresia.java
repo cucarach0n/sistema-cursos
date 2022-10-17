@@ -4,10 +4,14 @@
  */
 package com.rysoft.cursos.Modelos;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
 
@@ -26,5 +30,6 @@ public class Membresia {
     public Integer tiempo_membresia;
     public Integer tipoTiempo_membresia;
     public Integer act_membresia;
-    
+    @OneToMany(mappedBy ="membresia", fetch = FetchType.LAZY)
+    private List<Beneficio> beneficios;
 }

@@ -11,7 +11,9 @@ import com.rysoft.cursos.Entidades.ProgramasCursos;
 import com.rysoft.cursos.Entidades.ServicioCarrito;
 import com.rysoft.cursos.Interfaces.ICursoService;
 import com.rysoft.cursos.Interfaces.IProgramaService;
+import com.rysoft.cursos.Modelos.Curso;
 import com.rysoft.cursos.Modelos.Programa;
+import com.rysoft.cursos.Modelos.Programa_curso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,7 @@ import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -56,12 +59,23 @@ public class ControllerPrograma {
         model.addAttribute("servicios", carrito.getServicios());
         return "programas";
     }
-
+    
     @GetMapping("/programa")
-    public String ProgramaInfo(/*@RequestParam(value="id") int id, Model model*/Model model,HttpSession session) {
+    public String ProgramaInfo(@RequestParam(value="id") int id, Model model, HttpSession session) {
         //model.addAttribute("programa",programa);
         Carrito carrito = SessionUtil.getCarritoSession(session);
+        Programa programa = programaServicio.findProgramaById(id);
+        model.addAttribute("programa", programa);
         model.addAttribute("servicios", carrito.getServicios());
+        model.addAttribute("totalHoras", getTotalHorasCursos(programa.getCursos()));
         return "programa";
+    }
+
+    public static int getTotalHorasCursos(List<Programa_curso> cursos){
+        int totalHoras = 0;
+        for(Programa_curso curso : cursos){
+            totalHoras += curso.getCurso().getHoras_curso();
+        }
+        return totalHoras;
     }
 }

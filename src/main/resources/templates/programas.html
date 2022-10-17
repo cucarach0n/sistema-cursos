@@ -61,7 +61,7 @@
       <div class="l-grid-page">
           
           <article th:each="program,status: ${programas}" th:with="descuento=${#numbers.formatDecimal(program.prec_programa, 0,0)} * (${#numbers.formatDecimal(program.descu_programa, 0,0)} * 0.01)" class="card card--program">
-            <a class="card__img" th:href="@{/programa}">
+            <a class="card__img" th:href="@{/programa(id=${program.id_programa})}">
               <img th:src="${program.foto_programa}" alt="Imágen">
               <h3 class="card__img-title" th:text="${program.nom_programa}">Programa de especialista en Excel</h3>
             </a><!-- .card__img -->

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.rysoft.cursos.Controlador.Util.SessionUtil;
 import com.rysoft.cursos.Entidades.Carrito;
@@ -37,11 +38,13 @@ public class ControllerMembresia {
         return "membresias";
     }
 
-    @GetMapping("/membership")
-    public String MembresiaInfo(/*@RequestParam(value="id") int id, Model model*/Model model,HttpSession session) {
+    @GetMapping("/membresia")
+    public String MembresiaInfo(@RequestParam(value="id") int id, Model model, HttpSession session) {
         //model.addAttribute("membrecia",membrecia);
         Carrito carrito = SessionUtil.getCarritoSession(session);
+        Membresia membresia = membresiaService.findMembresiaById(id);
         model.addAttribute("servicios", carrito.getServicios());
+        model.addAttribute("membresia", membresia);
         return "membership";
     }
 
