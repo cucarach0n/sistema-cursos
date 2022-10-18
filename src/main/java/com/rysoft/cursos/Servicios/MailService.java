@@ -1,5 +1,6 @@
 package com.rysoft.cursos.Servicios;
 
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
@@ -23,7 +24,7 @@ public class MailService {
     private JavaMailSender mailSender;
     
     @Async
-    public void sendEmail(String to, String subject, String text) throws MessagingException, MalformedURLException{
+    public void sendEmail(String to, String subject, String text) throws MessagingException, MalformedURLException, UnsupportedEncodingException{
         /*//Esto es para enviar mensajes simples
         SimpleMailMessage message = new SimpleMailMessage();
         
@@ -35,9 +36,10 @@ public class MailService {
         */
         //Mensajes más Complejos
         
+        String senderName = "Cursos Rysoft";
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper message = new MimeMessageHelper(mimeMessage,true,"UTF-8");
-        message.setFrom("enviacms123@gmail.com");
+        message.setFrom("enviacms123@gmail.com",senderName);
         /*
         Part attachment = new MimeBodyPart();
         URL url = new URL("https://www.zegelvirtual.com/sites/default/files/styles/productos/public/productos/BASICO.jpg.webp?itok=f6BeupXy");

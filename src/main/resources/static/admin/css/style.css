@@ -1,0 +1,89 @@
+.weather-widget-two {
+  position: relative;
+  background-color: #24695c;
+  height: 350px;
+  overflow: hidden; }
+  .weather-widget-two p {
+    color: #fff; }
+  .weather-widget-two .card-body .media {
+    margin-bottom: 10px; }
+  .weather-widget-two svg path.climacon_component-stroke {
+    fill: #fff; }
+  .weather-widget-two .top-bg-whether {
+    position: absolute;
+    top: -50px;
+    right: -28px;
+    opacity: 0.1; }
+    .weather-widget-two .top-bg-whether svg {
+      width: 200px;
+      height: 200px; }
+  .weather-widget-two .num {
+    font-weight: 600; }
+  .weather-widget-two .climacon_component-stroke {
+    stroke: #fff; }
+  .weather-widget-two .bottom-whetherinfo svg {
+    width: 150px;
+    height: 150px;
+    opacity: 0.1;
+    color: #fff;
+    position: relative;
+    top: 0;
+    left: -35px; }
+  .weather-widget-two .bottom-whetherinfo .whether-content {
+    text-align: right;
+    position: relative;
+    top: -15px;
+    color: #fff; }
+
+.mobile-clock-widget {
+  background: url(../images/other-images/mobile-clock-wallpaper.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 350px;
+  color: #fff;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-blend-mode: overlay;
+  background-color: #17433b;
+  position: relative; }
+  .mobile-clock-widget .bg-svg {
+    position: absolute;
+    top: -4px;
+    left: -25px; }
+    .mobile-clock-widget .bg-svg svg {
+      width: 150px;
+      height: 150px;
+      opacity: 0.08; }
+  .mobile-clock-widget .clock {
+    padding: 0;
+    position: relative;
+    list-style: none;
+    margin: 0 auto;
+    height: 175px;
+    width: 175px;
+    display: block;
+    background: url(../images/other-images/clock-face.png) 5% center no-repeat; }
+  .mobile-clock-widget .sec {
+    background: url(../images/sec.svg);
+    z-index: 3; }
+  .mobile-clock-widget .min {
+    background: url(../images/min.svg);
+    z-index: 2; }
+  .mobile-clock-widget .hour {
+    background: url(../images/hour.svg);
+    z-index: 1; }
+
+.mobile-clock-widget #date {
+  margin-top: 30px;
+  font-weight: 700; }
+
+.mobile-clock-widget p {
+  font-weight: 600; }

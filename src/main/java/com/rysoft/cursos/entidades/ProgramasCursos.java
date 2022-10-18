@@ -10,6 +10,21 @@ public class ProgramasCursos {
     public Float vigencia_programa;
     public Integer act_programa;
     public int cantCurso_programa;
+
+    public ProgramasCursos() {
+    }
+
+    public ProgramasCursos(int id_programa, float descu_programa, String nom_programa, Float prec_programa, String desc_programa, String foto_programa, Float vigencia_programa, Integer act_programa, int cantCurso_programa) {
+        this.id_programa = id_programa;
+        this.descu_programa = descu_programa;
+        this.nom_programa = nom_programa;
+        this.prec_programa = prec_programa;
+        this.desc_programa = desc_programa;
+        this.foto_programa = foto_programa;
+        this.vigencia_programa = vigencia_programa;
+        this.act_programa = act_programa;
+        this.cantCurso_programa = cantCurso_programa;
+    }
     
     public int getId_programa() {
         return id_programa;

@@ -14,6 +14,7 @@ import com.rysoft.cursos.Modelos.Curso;
 import com.rysoft.cursos.Modelos.Inscripciones;
 import com.rysoft.cursos.Modelos.Programa;
 import com.rysoft.cursos.Servicios.MailService;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 
 import java.util.ArrayList;
@@ -51,37 +52,10 @@ public class ControllerHome {
     @GetMapping("/")
     public String Home(Model model, HttpSession session) {
         Carrito carrito = SessionUtil.getCarritoSession(session);
-        List<Curso> cursos = cursoServicio.listarCursosCategoria();
-        List<Categoria> categorias = categoriaServicio.listarCategoriasLimite(2);
-        List<CategoriaCursos> categoriasCursos = new ArrayList<CategoriaCursos>();
-        List<Programa> programas = programaServicio.listarProgramas();
-        List<ProgramasCursos> programasCursos = new ArrayList<ProgramasCursos>();
-        programas.forEach((programa) -> {
-            ProgramasCursos pc = new ProgramasCursos();
-            pc.setId_programa(programa.getId_programa());
-            pc.setDesc_programa(programa.getDesc_programa());
-            pc.setNom_programa(programa.getNom_programa());
-            pc.setPrec_programa(programa.getPrec_programa());
-            pc.setDescu_programa(programa.getDescu_programa());
-            pc.setFoto_programa(programa.getFoto_programa());
-            pc.setVigencia_programa(programa.getVigencia_programa());
-            pc.setAct_programa(programa.getAct_programa());
-            pc.setCantCurso_programa(cursoServicio.filtrarCursosByPrograma(programa.getId_programa()).size());
-            programasCursos.add(pc);
-        });
-
-        categorias.forEach(categoria -> {
-            CategoriaCursos cc = new CategoriaCursos();
-            cc.setId_categoria(categoria.getId_categoria());
-            cc.setNom_categoria(categoria.getNom_categoria());
-            cc.setAct_categoria(categoria.getAct_categoria());
-            cc.setCursos(cursoServicio.filtrarCursosByCategoria(categoria.getId_categoria()));
-            categoriasCursos.add(cc);
-        });
-        model.addAttribute("categorias", categorias);
-        model.addAttribute("cursos", cursos);
-        model.addAttribute("categoriasCursos", categoriasCursos);
-        model.addAttribute("programas", programasCursos);
+        model.addAttribute("categorias", modelCategoria());
+        model.addAttribute("cursos", ModelCurso());
+        model.addAttribute("categoriasCursos", modelCategoriaCurs());
+        model.addAttribute("programas", modelProgramCurs());
         model.addAttribute("servicios", carrito.getServicios());
         return "index";
     }
@@ -92,9 +66,12 @@ public class ControllerHome {
             @RequestParam("celular") String celular,
             @RequestParam("email") String email,
             @RequestParam("curso") String curso,
-            Model model, HttpSession session) throws MessagingException, MalformedURLException {
+            Model model, HttpSession session) throws MessagingException, MalformedURLException, UnsupportedEncodingException {
+
         Carrito carrito = SessionUtil.getCarritoSession(session);
-        List<Curso> cursosList = cursoServicio.listarCursosCategoria();
+
+        List<Curso> cursosList = ModelCurso();
+        System.out.println("Entro al POST");
         if (chkNamVldFnc(nombres) && chkNamVldFnc(apellidos) && chkMailVldFnc(email) && chkPhonVldFnc(celular)) {//Error al validar email, ver en la funcion validacion, Resposable: Dilam Chuquilin
             Inscripciones p = new Inscripciones(nombres,
                     apellidos,
@@ -106,12 +83,14 @@ public class ControllerHome {
         } else {
             System.out.println("Error en la validacion");
         }
-        List<Categoria> categorias = categoriaServicio.listarCategorias();
-        model.addAttribute("categorias", categorias);
-        model.addAttribute("cursos", cursosList);
-        model.addAttribute("servicios", carrito.getServicios());
-        return "index";
 
+        model.addAttribute("categorias", modelCategoria());
+        model.addAttribute("cursos", cursosList);
+        model.addAttribute("categoriasCursos", modelCategoriaCurs());
+        model.addAttribute("programas", modelProgramCurs());
+        model.addAttribute("servicios", carrito.getServicios());
+
+        return "index";
     }
 
     @GetMapping("/terminos")
@@ -119,15 +98,50 @@ public class ControllerHome {
         return "termns";
     }
 
-    private Curso buscarCurs(List<Curso> cursos, String buscado) {
-        Curso c = new Curso();
-        for (int i = 0; i < cursos.size(); i++) {
-            if (buscado.equals(cursos.get(i).getNom_curso())) {
-                c = cursos.get(i);
-                break;
-            }
-        }
-        return c;
+        private List<Curso> ModelCurso() {
+        List<Curso> cursosList = cursoServicio.listarCursosCategoria();
+        return cursosList;
+    }
+
+    private List<Categoria> modelCategoria() /*throws Exception*/ {
+        List<Categoria> categoriaList = categoriaServicio.listarCategoriasLimite(2);
+        return categoriaList;
+    }
+
+    private List<Programa> modelPrograma() {
+        List<Programa> programas = programaServicio.listarProgramas();
+        return programas;
+    }
+
+    private List<ProgramasCursos> modelProgramCurs() {
+        List<Programa> programas = modelPrograma();
+        List<ProgramasCursos> programasCursos = new ArrayList<ProgramasCursos>();
+        programas.forEach((programa) -> {
+            ProgramasCursos pc = new ProgramasCursos(programa.getId_programa(),
+                    programa.getDescu_programa(),
+                    programa.getNom_programa(),
+                    programa.getPrec_programa(),
+                    programa.getDesc_programa(),
+                    programa.getFoto_programa(),
+                    programa.getVigencia_programa(),
+                    programa.getAct_programa(),
+                    cursoServicio.filtrarCursosByPrograma(programa.getId_programa()).size());
+            programasCursos.add(pc);
+        });
+        return programasCursos;
+    }
+
+    private List<CategoriaCursos> modelCategoriaCurs() {
+        List<Categoria> categorias = modelCategoria();
+        List<CategoriaCursos> categoriasCursos = new ArrayList<CategoriaCursos>();
+        categorias.forEach(categoria -> {
+            CategoriaCursos cc = new CategoriaCursos(categoria.getId_categoria(),
+                    categoria.getNom_categoria(),
+                    categoria.getAct_categoria(),
+                    cursoServicio.filtrarCursosByCategoria(categoria.getId_categoria()));
+            categoriasCursos.add(cc);
+        });
+        return categoriasCursos;
     }
 
     public static boolean chkNamVldFnc(String namVar) {
@@ -150,5 +164,9 @@ public class ControllerHome {
         Matcher mVar = pVar.matcher(phonVar);
         return mVar.matches();
     }
-
+     
+    @GetMapping("/dashboard")
+    public String dashboard(){
+        return "/dashboard/dashboard"; //editar.html
+    }
 }

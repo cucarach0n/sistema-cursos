@@ -153,48 +153,48 @@
               </form>
             </section>
             <section id="register">
-                <form action="registrar" method="POST" class="l-form-modal">
+                <form id="form_register" th:action="@{process_register}" method="POST" class="l-form-modal">
                 <h3 class="l-form-modal__full">Crea tu cuenta</h3>
 
                 <div class="material-input material-input--primary">
-                  <input type="email" id="email" autocomplete="off" required="required">
+                  <input type="email" id="email" autocomplete="off" required="required" name="email">
                   <label for="email">Correo electrónico</label>
                 </div>
 
                 <div class="material-input material-input--primary" required="required">
-                  <input type="password" id="pass" autocomplete="off">
+                    <input type="password" id="pass" autocomplete="off" required="required" name="password">
                   <label for="pass">Contraseña</label>
                 </div>
 
                 <h3 class="l-form-modal__full">Llena tus datos</h3>
 
-                <div class="material-input material-input--primary" required="required">
-                    <input type="text" id="nom_persona" autocomplete="off">
+                <div class="material-input material-input--primary">
+                    <input type="text" id="nom_persona" autocomplete="off" required="required" name="nombre">
                   <label for="text">Nombre</label>
                 </div>
 
                 <div class="material-input material-input--primary">
-                  <input type="text" id="ape_persona" autocomplete="off" required="required">
+                  <input type="text" id="ape_persona" autocomplete="off" required="required" name="apellidos">
                   <label for="text">Apellidos</label>
                 </div>
 
                 <div class="material-input material-input--primary">
-                    <input type="text" id="dni_persona" autocomplete="off">
+                    <input type="text" id="dni_persona" autocomplete="off" required="required" name="dni">
                   <label for="text">Documento de identidad</label>
                 </div>
 
                 <div class="material-input material-input--primary">
-                    <input type="text" id="direccion" autocomplete="off">
+                    <input type="text" id="direccion" autocomplete="off" required="required" name="direccion">
                   <label for="text">Direcci&oacute;n</label>
                 </div>
 
                 <div class="material-input material-input--primary">
-                  <input type="date" id="fechanacimiento" autocomplete="off" required="required">
+                  <input type="date" id="fechanacimiento" autocomplete="off" >
                   
                 </div>
 
                 <div class="material-input material-input--primary">
-                    <input type="number" id="telefono" autocomplete="off">
+                    <input type="number" id="telefono" autocomplete="off" required="required" name="telefono">
                   <label for="number">Tel&eacute;fono</label>
                 </div>
 
