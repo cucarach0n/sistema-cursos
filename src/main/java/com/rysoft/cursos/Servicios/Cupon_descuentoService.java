@@ -29,4 +29,8 @@ public class Cupon_descuentoService implements ICupon_descuentoService {
         }
         return null;
     }
+    @Override
+    public Cupon_descuento getLastCupon_descuento() {
+        return data.getLastCupon_descuento();
+    }
 }

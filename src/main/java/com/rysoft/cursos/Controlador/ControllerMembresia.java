@@ -19,13 +19,17 @@ import com.rysoft.cursos.Controlador.Util.SessionUtil;
 import com.rysoft.cursos.Entidades.Carrito;
 import com.rysoft.cursos.Entidades.ServicioCarrito;
 import com.rysoft.cursos.Interfaces.IMembresiaService;
+import com.rysoft.cursos.Interfaces.IValorService;
 import com.rysoft.cursos.Modelos.Membresia;
+import com.rysoft.cursos.Modelos.Valor;
 
 @Controller
 public class ControllerMembresia {
 
-    @Autowired IMembresiaService membresiaService;
-
+    @Autowired 
+    IMembresiaService membresiaService;
+    @Autowired
+    private IValorService valorService; 
     @GetMapping("/membresias")
     public String Home(Model model,HttpSession session) {
         List<Membresia> membresias = membresiaService.listarMembresias();
@@ -43,6 +47,8 @@ public class ControllerMembresia {
         //model.addAttribute("membrecia",membrecia);
         Carrito carrito = SessionUtil.getCarritoSession(session);
         Membresia membresia = membresiaService.findMembresiaById(id);
+        List<Valor> valores = valorService.listarValores();
+        model.addAttribute("valores", valores);
         model.addAttribute("servicios", carrito.getServicios());
         model.addAttribute("membresia", membresia);
         return "membership";

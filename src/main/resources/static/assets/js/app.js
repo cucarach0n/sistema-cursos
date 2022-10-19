@@ -206,7 +206,10 @@ new Modal('#modal-cart');
   //===
   // VARIABLES
   //===
-  const DATE_TARGET = new Date('09/30/2022 0:01 AM');
+
+  const DATE_TARGET = data;
+  
+  
   // DOM for render
   const SPAN_DAYS = document.querySelector('span#days');
   const SPAN_HOURS = document.querySelector('span#hours');
@@ -227,19 +230,21 @@ new Modal('#modal-cart');
   */
   function updateCountdown() {
       // Calcs
-      const NOW = new Date()
-      const DURATION = DATE_TARGET - NOW;
-      const REMAINING_DAYS = Math.floor(DURATION / MILLISECONDS_OF_A_DAY);
-      const REMAINING_HOURS = Math.floor((DURATION % MILLISECONDS_OF_A_DAY) / MILLISECONDS_OF_A_HOUR);
-      const REMAINING_MINUTES = Math.floor((DURATION % MILLISECONDS_OF_A_HOUR) / MILLISECONDS_OF_A_MINUTE);
-      const REMAINING_SECONDS = Math.floor((DURATION % MILLISECONDS_OF_A_MINUTE) / MILLISECONDS_OF_A_SECOND);
-      // Thanks Pablo Monteserín (https://pablomonteserin.com/cuenta-regresiva/)
+      if(DATE_TARGET !== null) {
+        const NOW = new Date()
+        const DURATION = DATE_TARGET - NOW;
+        const REMAINING_DAYS = Math.floor(DURATION / MILLISECONDS_OF_A_DAY);
+        const REMAINING_HOURS = Math.floor((DURATION % MILLISECONDS_OF_A_DAY) / MILLISECONDS_OF_A_HOUR);
+        const REMAINING_MINUTES = Math.floor((DURATION % MILLISECONDS_OF_A_HOUR) / MILLISECONDS_OF_A_MINUTE);
+        const REMAINING_SECONDS = Math.floor((DURATION % MILLISECONDS_OF_A_MINUTE) / MILLISECONDS_OF_A_SECOND);
+        // Thanks Pablo Monteserín (https://pablomonteserin.com/cuenta-regresiva/)
 
-      // Render
-      SPAN_DAYS.textContent = REMAINING_DAYS;
-      SPAN_HOURS.textContent = REMAINING_HOURS;
-      SPAN_MINUTES.textContent = REMAINING_MINUTES;
-      SPAN_SECONDS.textContent = REMAINING_SECONDS;
+        // Render
+        SPAN_DAYS.textContent = REMAINING_DAYS;
+        SPAN_HOURS.textContent = REMAINING_HOURS;
+        SPAN_MINUTES.textContent = REMAINING_MINUTES;
+        SPAN_SECONDS.textContent = REMAINING_SECONDS;
+      }
   }
 
   if(SPAN_DAYS) {

@@ -7,6 +7,7 @@ package com.rysoft.cursos.Controlador;
 import com.rysoft.cursos.Interfaces.ICursoService;
 import com.rysoft.cursos.Interfaces.ICurso_contenidoService;
 import com.rysoft.cursos.Interfaces.IUnidadService;
+import com.rysoft.cursos.Interfaces.IValorService;
 import com.rysoft.cursos.Controlador.Util.SessionUtil;
 import com.rysoft.cursos.Entidades.Carrito;
 import com.rysoft.cursos.Entidades.ServicioCarrito;
@@ -15,6 +16,7 @@ import com.rysoft.cursos.Modelos.Categoria;
 import com.rysoft.cursos.Modelos.Curso;
 import com.rysoft.cursos.Modelos.Curso_contenido;
 import com.rysoft.cursos.Modelos.Unidad;
+import com.rysoft.cursos.Modelos.Valor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +41,8 @@ public class ControllerCurso {
     private ICategoriaService categoriaServicio;
     @Autowired
     private ICurso_contenidoService curso_contenidoServicio;
-
+    @Autowired
+    private IValorService valorService;
     //private ICursoService service1;
 
     @GetMapping("/cursos")
@@ -78,8 +81,8 @@ public class ControllerCurso {
         Carrito carrito = SessionUtil.getCarritoSession(session);
         Curso curso = cursoServicio.findCursoById(id);
         List<Curso> cursos = cursoServicio.filtrarCursosByCategoria(curso.getCategoria().getId_categoria());
-        //List<Unidad> unidades = unidadServicio.listarUnidadesPorContenido(curso.getId_curso());
-        //model.addAttribute("curso",curso);
+        List<Valor> valores = valorService.listarValores();
+        model.addAttribute("valores", valores);
         model.addAttribute("servicios", carrito.getServicios());
         model.addAttribute("curso", curso);
         model.addAttribute("cursosSugerencia", cursos);

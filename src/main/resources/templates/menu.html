@@ -64,6 +64,21 @@
       </div>
     </div>
   </div>
+  <script th:if="${cuponPromo != null}" th:inline="javascript">
+    /*<![CDATA[*/
+    let fechaFin = /*[[${cuponPromo.fechaFin_cupondescuento}]]*/;
+    let anio = fechaFin.substring(0, 4);
+    let mes = fechaFin.substring(5, 7);
+    let dia = fechaFin.substring(8, 10);
+    
+    //"09-24-2011"
+    const data = new Date(mes +'-'+dia+'-'+anio+ " 00:01 AM");;
+    
+    /*]]>*/
+  </script>
+  <script th:if="${cuponPromo == null}">
+    const data = null;
+  </script>
 </footer> 
 
 <header id="headerInicio" class="site-header">

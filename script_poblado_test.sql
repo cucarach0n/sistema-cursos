@@ -92,5 +92,15 @@ insert into docente_curso(fecha_reg_docentecurso,id_curso,id_usuario) values(now
 insert into docente_curso(fecha_reg_docentecurso,id_curso,id_usuario) values(now(),3,3);
 insert into docente_curso(fecha_reg_docentecurso,id_curso,id_usuario) values(now(),4,2);
 
-insert into cupon_descuento(act_cupondescuento,cantidad_uso_cupondescuento,codigo_cupondescuento,desc_cupondescuento,fecha_fin_cupondescuento,fecha_ini_cupondescuento,tipo_descuento_cupondescuento,valor_descuento_cupondescuento)
-		values(1,23,'abcde','descuento',now() + 10,now(),1,15);
+insert into cupon_descuento(act_cupondescuento,cantidad_uso_cupondescuento,codigo_cupondescuento,desc_cupondescuento,fecha_fin_cupondescuento,fecha_ini_cupondescuento,tipo_descuento_cupondescuento,valor_descuento_cupondescuento,fechaRegistro_cupondescuento)
+		values(1,23,'abcde','descuento',DATE_ADD(now(), INTERVAL 10 DAY),now(),1,15,now());
+insert into cupon_descuento(act_cupondescuento,cantidad_uso_cupondescuento,codigo_cupondescuento,desc_cupondescuento,fecha_fin_cupondescuento,fecha_ini_cupondescuento,tipo_descuento_cupondescuento,valor_descuento_cupondescuento,fecha_registro_cupondescuento)
+		values(1,23,'abcdg','descuento',DATE_ADD(now(), INTERVAL 10 DAY),DATE_ADD(now(), INTERVAL 5 DAY),1,15,'2022-10-24');
+insert into valor(act_valor,descripcion_valor,foto_valor,nombre_valor) values(1,"+ 50 años formando a los mejores profesionales y empresarios1","https://cdn-icons-png.flaticon.com/512/5300/5300189.png","Prestigio1");
+insert into valor(act_valor,descripcion_valor,foto_valor,nombre_valor) values(1,"+ 50 años formando a los mejores profesionales y empresarios2","https://cdn-icons-png.flaticon.com/512/5300/5300189.png","Prestigio2");
+insert into valor(act_valor,descripcion_valor,foto_valor,nombre_valor) values(1,"+ 50 años formando a los mejores profesionales y empresarios3","https://cdn-icons-png.flaticon.com/512/5300/5300189.png","Prestigio3");
+insert into valor(act_valor,descripcion_valor,foto_valor,nombre_valor) values(1,"+ 50 años formando a los mejores profesionales y empresarios4","https://cdn-icons-png.flaticon.com/512/5300/5300189.png","Prestigio4");
+insert into valor(act_valor,descripcion_valor,foto_valor,nombre_valor) values(1,"+ 50 años formando a los mejores profesionales y empresarios5","https://cdn-icons-png.flaticon.com/512/5300/5300189.png","Prestigio5");
+insert into valor(act_valor,descripcion_valor,foto_valor,nombre_valor) values(1,"+ 50 años formando a los mejores profesionales y empresarios6","https://cdn-icons-png.flaticon.com/512/5300/5300189.png","Prestigio6");
+insert into valor(act_valor,descripcion_valor,foto_valor,nombre_valor) values(1,"+ 50 años formando a los mejores profesionales y empresarios7","https://cdn-icons-png.flaticon.com/512/5300/5300189.png","Prestigio7");
+insert into valor(act_valor,descripcion_valor,foto_valor,nombre_valor) values(1,"+ 50 años formando a los mejores profesionales y empresarios7","https://cdn-icons-png.flaticon.com/512/5300/5300189.png","Prestigio8");

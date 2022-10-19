@@ -5,6 +5,8 @@
 package com.rysoft.cursos.Modelos;
 
 import java.sql.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,8 +25,10 @@ public class Cupon_descuento {
     @GeneratedValue(strategy=GenerationType.IDENTITY) /* Autoincremental */
     public int id_cupondescuento;
     public String desc_cupondescuento;
+    public Date fechaRegistro_cupondescuento;
     public Date fechaIni_cupondescuento;
     public Date fechaFin_cupondescuento;
+    @Column(unique=true)
     public String codigo_cupondescuento;
     public int cantidadUso_cupondescuento;
     public Float valorDescuento_cupondescuento;

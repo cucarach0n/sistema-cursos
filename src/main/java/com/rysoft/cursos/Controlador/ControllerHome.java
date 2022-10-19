@@ -4,15 +4,20 @@ import com.rysoft.cursos.Controlador.Util.SessionUtil;
 import com.rysoft.cursos.Entidades.Carrito;
 import com.rysoft.cursos.Entidades.CategoriaCursos;
 import com.rysoft.cursos.Entidades.ProgramasCursos;
+import com.rysoft.cursos.InterfaceModelos.ICupon_descuento;
 import com.rysoft.cursos.Interfaces.ICategoriaService;
+import com.rysoft.cursos.Interfaces.ICupon_descuentoService;
 import com.rysoft.cursos.Interfaces.ICursoService;
 import com.rysoft.cursos.Interfaces.IProgramaService;
+import com.rysoft.cursos.Interfaces.IValorService;
 import com.rysoft.cursos.Interfaces.IinscripcionesService;
 
 import com.rysoft.cursos.Modelos.Categoria;
+import com.rysoft.cursos.Modelos.Cupon_descuento;
 import com.rysoft.cursos.Modelos.Curso;
 import com.rysoft.cursos.Modelos.Inscripciones;
 import com.rysoft.cursos.Modelos.Programa;
+import com.rysoft.cursos.Modelos.Valor;
 import com.rysoft.cursos.Servicios.MailService;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -47,16 +52,25 @@ public class ControllerHome {
     private IProgramaService programaServicio;
     @Autowired
     private MailService mailService;
+    @Autowired
+    private ICupon_descuentoService cupon_descuentoService;
+    @Autowired
+    private IValorService valorService;
 
     //private ICursoService service1;
     @GetMapping("/")
     public String Home(Model model, HttpSession session) {
         Carrito carrito = SessionUtil.getCarritoSession(session);
+        Cupon_descuento cuponPromo = cupon_descuentoService.getLastCupon_descuento();
+        List<Valor> valores = valorService.listarValores();
+        model.addAttribute("valores", valores);
+        model.addAttribute("cuponPromo", cuponPromo);
         model.addAttribute("categorias", modelCategoria());
         model.addAttribute("cursos", ModelCurso());
         model.addAttribute("categoriasCursos", modelCategoriaCurs());
         model.addAttribute("programas", modelProgramCurs());
         model.addAttribute("servicios", carrito.getServicios());
+        
         return "index";
     }
 
@@ -83,7 +97,8 @@ public class ControllerHome {
         } else {
             System.out.println("Error en la validacion");
         }
-
+        Cupon_descuento cuponPromo = cupon_descuentoService.getLastCupon_descuento();
+        model.addAttribute("cuponPromo", cuponPromo);
         model.addAttribute("categorias", modelCategoria());
         model.addAttribute("cursos", cursosList);
         model.addAttribute("categoriasCursos", modelCategoriaCurs());

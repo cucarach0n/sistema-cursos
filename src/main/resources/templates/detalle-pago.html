@@ -180,8 +180,8 @@
               <h2 style="line-height: 1; font-size: 25px; text-align: left;">Código descuento</h2>
               <form action="validarCupon" method="post" style="display: flex; align-items: stretch;">
                 <div class="material-input material-input--primary" style="margin: 0; flex-grow: 1;">
-                  <input th:if="${descuento == 0}" type="text" id="code" name="codigoCupon" autocomplete="off" required>
-                  <input th:if="${descuento != 0}" th:value="${carrito.cuponDescuento.codigo_cupondescuento}" disabled class="non-empty" type="text" id="code" name="codigoCupon" autocomplete="off" required>
+                  <input th:if="${descuento == 0}" style="text-transform: uppercase;" type="text" id="code" name="codigoCupon" autocomplete="off" required>
+                  <input th:if="${descuento != 0}" style="text-transform: uppercase;" th:value="${carrito.cuponDescuento.codigo_cupondescuento}" disabled class="non-empty" type="text" id="code" name="codigoCupon" autocomplete="off" required>
                   <label for="code">Código</label>
                 </div>
                 <input th:if="${descuento == 0}" class="cart-btn" type="submit" value="Validar" style="margin-left: 10px;">
@@ -290,5 +290,8 @@
   <script src="./assets/js/owl.carousel.min.js"></script>
   <!-- Scripts -->
   <script src="./assets/js/app.js"></script>
+
+  
+
 </body>
 </html>

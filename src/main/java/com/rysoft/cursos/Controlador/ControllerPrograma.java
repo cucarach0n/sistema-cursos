@@ -11,9 +11,11 @@ import com.rysoft.cursos.Entidades.ProgramasCursos;
 import com.rysoft.cursos.Entidades.ServicioCarrito;
 import com.rysoft.cursos.Interfaces.ICursoService;
 import com.rysoft.cursos.Interfaces.IProgramaService;
+import com.rysoft.cursos.Interfaces.IValorService;
 import com.rysoft.cursos.Modelos.Curso;
 import com.rysoft.cursos.Modelos.Programa;
 import com.rysoft.cursos.Modelos.Programa_curso;
+import com.rysoft.cursos.Modelos.Valor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +36,8 @@ public class ControllerPrograma {
     private IProgramaService programaServicio;
     @Autowired
     private ICursoService cursoServicio;
-
+    @Autowired
+    private IValorService valorService;
     @GetMapping("/programas")
     public String Home(Model model,HttpSession session) {
         Carrito carrito = SessionUtil.getCarritoSession(session);
@@ -65,6 +68,8 @@ public class ControllerPrograma {
         //model.addAttribute("programa",programa);
         Carrito carrito = SessionUtil.getCarritoSession(session);
         Programa programa = programaServicio.findProgramaById(id);
+        List<Valor> valores = valorService.listarValores();
+        model.addAttribute("valores", valores);
         model.addAttribute("programa", programa);
         model.addAttribute("servicios", carrito.getServicios());
         model.addAttribute("totalHoras", getTotalHorasCursos(programa.getCursos()));
