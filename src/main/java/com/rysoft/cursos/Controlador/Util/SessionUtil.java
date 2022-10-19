@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import com.rysoft.cursos.Entidades.Carrito;
 import com.rysoft.cursos.Entidades.ServicioCarrito;
+import com.rysoft.cursos.Modelos.Cupon_descuento;
 
 public class SessionUtil {
     public static Carrito getCarritoSession(HttpSession session){
@@ -42,7 +43,7 @@ public class SessionUtil {
         if(existe){
             return;
         }
-        //${#numbers.formatDecimal(curs.prec_curso, 0,0)} * (${#numbers.formatDecimal(curs.descto_curso, 0,0)} * 0.01)
+        //${#numbers.formatDecimal(curs.prec_curso, 1, 'COMMA', 1, 'POINT')} * (${#numbers.formatDecimal(curs.descto_curso, 1, 'COMMA', 1, 'POINT')} * 0.01)
         descuento = (servicio.getPrecioServicio() * (servicio.getDescServicio() * 0.01f));
         servicio.setPrecioFinalServicio(servicio.getPrecioServicio() - descuento);
         carrito.getServicios().add(servicio);
@@ -50,5 +51,10 @@ public class SessionUtil {
         
         carrito.setMonto_subtotal_carrito(subTotal  + servicio.getPrecioServicio());
         carrito.setMonto_total_carrito(montoTotal + ( servicio.getPrecioServicio() - descuento));
+    }
+    public static void agregarCuponCarrito(HttpSession session, Cupon_descuento cupon){
+        Carrito carrito = getCarritoSession(session);
+        carrito.setCuponDescuento(cupon);
+        
     }
 }

@@ -55,7 +55,7 @@
             </a>
           </li>
           <li>
-            <a th:href="@{/curso?id=${curso.id_curso}}" th:text="${curso.nom_curso}">
+            <a th:href="@{/curso(id=${curso.id_curso})}" th:text="${curso.nom_curso}">
               Excel Básico
             </a>
           </li>
@@ -64,7 +64,7 @@
       <div class="l-page-generic">
         <section class="l-page-generic__main">
           <!-- Course -->
-          <article class="card card--course-desc" th:with="descuento=${#numbers.formatDecimal(curso.prec_curso, 0,0)} * (${#numbers.formatDecimal(curso.descto_curso, 0,0)} * 0.01)">
+          <article class="card card--course-desc" th:with="descuento=${#numbers.formatDecimal(curso.prec_curso, 1, 'COMMA', 1, 'POINT')} * (${#numbers.formatDecimal(curso.descto_curso, 1, 'COMMA', 1, 'POINT')} * 0.01)">
             <div class="card__img">
               <iframe th:src="${curso.video_curso}" width="640" height="350" frameborder="0" allow="autoplay; fullscreen" data-ready="true"></iframe>
             </div><!-- .card__img -->
@@ -82,8 +82,8 @@
                 </div>
 
                 <p class="price">
-                  <span th:text="${'S/ ' + #numbers.formatDecimal(curso.prec_curso ,0,0) }">S/ 279</span>
-                  <span th:text="${'S/ ' + #numbers.formatDecimal(curso.prec_curso - descuento,0,0)}">S/ 237</span>
+                  <span th:text="${'S/ ' + #numbers.formatDecimal(curso.prec_curso ,1, 'COMMA', 1, 'POINT') }">S/ 279</span>
+                  <span th:text="${'S/ ' + #numbers.formatDecimal(curso.prec_curso - descuento,1, 'COMMA', 1, 'POINT')}">S/ 237</span>
                 </p>
               </div>
 
@@ -152,12 +152,12 @@
                     </div>
                   </section>
                   <section id="docente">
-                    <div class="docente">
+                    <div th:each="docenteCurso :${curso.docentesCursos}" class="docente">
                       <div class="docente__header">
-                        <img src="https://www.zegelvirtual.com/sites/default/files/styles/docentes/public/docentes/Foto-CV.JPG.webp?itok=-Jyzi7Gu" alt="Docente">
-                        <h2>Jorge Emilio Martin Zubia Chumpitaz</h2>
+                        <img th:src="${docenteCurso.usuario.persona.foto_persona}" alt="Docente">
+                        <h2 th:text="${docenteCurso.usuario.persona.nom_persona}">Jorge Emilio Martin Zubia Chumpitaz</h2>
                       </div>
-                      <p>Licenciado en Administración por la Universidad Nacional del Callao y Profesional Técnico en Redes y Comunicaciones de Datos por el IST TECSUP, cuenta con estudios de especialización en Microsoft Office (Word, Excel, Power Point, Access, Project); además con especialización en manejo de indicadores y KPI’s por la Universidad Nacional de Ingeniería en la ciudad de Lima</p>
+                      <p th:text="${docenteCurso.usuario.persona.desc_persona}">Licenciado en Administración por la Universidad Nacional del Callao y Profesional Técnico en Redes y Comunicaciones de Datos por el IST TECSUP, cuenta con estudios de especialización en Microsoft Office (Word, Excel, Power Point, Access, Project); además con especialización en manejo de indicadores y KPI’s por la Universidad Nacional de Ingeniería en la ciudad de Lima</p>
                     </div>
                   </section>
                   <section id="faq">
@@ -220,7 +220,7 @@
         <section class="subsection">
           <div class="slider-courses">
             <div class="l-grid-courses">
-              <article class="card" th:each="curs,status: ${cursosSugerencia}" th:with="descuento=${#numbers.formatDecimal(curs.prec_curso, 0,0)} * (${#numbers.formatDecimal(curs.descto_curso, 0,0)} * 0.01)">
+              <article class="card" th:each="curs,status: ${cursosSugerencia}" th:with="descuento=${#numbers.formatDecimal(curs.prec_curso, 1, 'COMMA', 1, 'POINT')} * (${#numbers.formatDecimal(curs.descto_curso, 1, 'COMMA', 1, 'POINT')} * 0.01)">
                 <a class="card__img" th:href="@{/curso(id=${curs.id_curso})}"><!--th:href="@{/course(id=${curs.id_curso})}"-->
                     <img th:src="${curs.foto_curso}" alt="Imágen">
                 </a><!-- .card__img -->
@@ -237,8 +237,8 @@
                         </p>
                         
                         <p class="price">
-                            <span th:text="${'S/ ' + #numbers.formatDecimal(curs.prec_curso , 0,0)}">S/ 279</span>
-                            <span th:text="${'S/ ' + #numbers.formatDecimal(curs.prec_curso - descuento, 0,0)}">S/ 237</span>
+                            <span th:text="${'S/ ' + #numbers.formatDecimal(curs.prec_curso , 1, 'COMMA', 1, 'POINT')}">S/ 279</span>
+                            <span th:text="${'S/ ' + #numbers.formatDecimal(curs.prec_curso - descuento, 1, 'COMMA', 1, 'POINT')}">S/ 237</span>
                         </p>
                     </div>
 

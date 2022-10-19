@@ -2,10 +2,12 @@ package com.rysoft.cursos.Controlador.Util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.rysoft.cursos.Entidades.Carrito;
 import com.rysoft.cursos.Entidades.ServicioCarrito;
 import com.rysoft.cursos.Interfaces.ICursoService;
 import com.rysoft.cursos.Interfaces.IMembresiaService;
 import com.rysoft.cursos.Interfaces.IProgramaService;
+import com.rysoft.cursos.Modelos.Cupon_descuento;
 import com.rysoft.cursos.Modelos.Curso;
 import com.rysoft.cursos.Modelos.Membresia;
 import com.rysoft.cursos.Modelos.Programa;
@@ -45,5 +47,15 @@ public class CarritoUtil {
             servicioCarrito.setFotoServicio(programa.getFoto_programa());
         }
         return servicioCarrito;
+    }
+    public static double obtenerDescuento(Cupon_descuento cupon,Carrito carrito){
+        double descuento = 0;
+        if(cupon.getTipoDescuento_cupondescuento() == 1){
+            descuento =  carrito.getMonto_total_carrito()*(cupon.getValorDescuento_cupondescuento() * 0.01) ;
+        }
+        else if(cupon.getTipoDescuento_cupondescuento() == 2){
+            descuento = cupon.getValorDescuento_cupondescuento();
+        }
+        return descuento;
     }
 }

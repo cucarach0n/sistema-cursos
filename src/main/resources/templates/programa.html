@@ -55,7 +55,7 @@
             </a>
           </li>
           <li>
-            <a href="programa.html">
+            <a th:href="@{/programa(id=${programa.id_programa})}" th:text="${programa.nom_programa}">
               Programa de especialista en Excel
             </a>
           </li>
@@ -64,7 +64,7 @@
       <div class="l-page-generic">
         <section class="l-page-generic__main">
           <!-- Course -->
-          <article class="card card--course-desc" th:with="descuento=${#numbers.formatDecimal(programa.prec_programa, 0,0)} * (${#numbers.formatDecimal(programa.descu_programa, 0,0)} * 0.01)">
+          <article class="card card--course-desc" th:with="descuento=${#numbers.formatDecimal(programa.prec_programa, 1, 'COMMA', 1, 'POINT')} * (${#numbers.formatDecimal(programa.descu_programa, 1, 'COMMA', 1, 'POINT')} * 0.01)">
             <div class="card__img">
               <iframe th:src="${programa.video_programa}" width="640" height="350" frameborder="0" allow="autoplay; fullscreen" data-ready="true"></iframe>
             </div><!-- .card__img -->
@@ -81,8 +81,8 @@
                 </div>
 
                 <p class="price">
-                  <span th:text="${'S/ ' + #numbers.formatDecimal(programa.prec_programa , 0,0)}">S/ 279</span>
-                  <span th:text="${'S/ ' + #numbers.formatDecimal(programa.prec_programa - descuento, 0,0)}">S/ 237</span>
+                  <span th:text="${'S/ ' + #numbers.formatDecimal(programa.prec_programa , 1, 'COMMA', 1, 'POINT')}">S/ 279</span>
+                  <span th:text="${'S/ ' + #numbers.formatDecimal(programa.prec_programa - descuento, 1, 'COMMA', 1, 'POINT')}">S/ 237</span>
                 </p>
               </div>
 
@@ -104,10 +104,10 @@
               </div>
 
               <div class="card__buttons">
-                <a class="btn btn--outline btn--outline-primary btn--rounded" data-modal="#modal-cart" href="#">
+                <a class="btn btn--outline btn--outline-primary btn--rounded" th:data-idproducto="${programa.id_programa}" th:data-tiposervicio="${3}" data-modal="#modal-cart">
                   <i class="fa fa-shopping-cart"></i>
                 </a>
-                <a class="btn btn--outline btn--outline-primary btn--full" href="comprar-ahora.html">
+                <a class="btn btn--outline btn--outline-primary btn--full" th:href="@{/carrito(idProducto=${programa.id_programa},tipoServicio=${3})}">
                   Comprar ahora
                 </a>
               </div>
@@ -137,11 +137,9 @@
                           <ul>
                             <li th:each="contenido:${curso.curso.contenidos}" th:text="${contenido.nom_curso_contenido}">Conociendo Microsoft Excel</li>
                           </ul>
-                          <div class="course-desc__foot">
-                            <p>22 horas</p>
-                            <p>25 videos</p>
-                            <p>6 evaluaciones</p>
-                            <p>75 materiales</p>
+                          <div class="course-desc__foot" style="text-align:center;">
+                            <p th:text="${curso.curso.horas_curso} + ' horas'">22 horas</p>
+                            <p th:text="${curso.curso.cantMateriales_curso} +' materiales'">25 videos</p>
                           </div>
                         </div>
                       </div>
@@ -149,22 +147,20 @@
                     </div>
                   </section>
                   <section id="docente">
-                    <div class="docente">
-                      <div class="docente__header">
-                        <img src="https://www.zegelvirtual.com/sites/default/files/styles/docentes/public/docentes/Foto-CV.JPG.webp?itok=-Jyzi7Gu" alt="Docente">
-                        <h2>Jorge Emilio Martin Zubia Chumpitaz</h2>
+                    <th:block th:each="programaCurso :${programa.cursos}">
+                      <div th:each="docenteCurso :${programaCurso.curso.docentesCursos}" class="docente">
+                        <div class="docente__header">
+                          <img th:src="${docenteCurso.usuario.persona.foto_persona}" alt="Docente">
+                          <h2 th:text="${docenteCurso.usuario.persona.nom_persona}">Jorge Emilio Martin Zubia Chumpitaz</h2>
+                        </div>
+                        <p th:text="${docenteCurso.usuario.persona.desc_persona}">Licenciado en Administración por la Universidad Nacional del Callao y Profesional Técnico en Redes y Comunicaciones de Datos por el IST TECSUP, cuenta con estudios de especialización en Microsoft Office (Word, Excel, Power Point, Access, Project); además con especialización en manejo de indicadores y KPI’s por la Universidad Nacional de Ingeniería en la ciudad de Lima</p>
                       </div>
-                      <p>Licenciado en Administración por la Universidad Nacional del Callao y Profesional Técnico en Redes y Comunicaciones de Datos por el IST TECSUP, cuenta con estudios de especialización en Microsoft Office (Word, Excel, Power Point, Access, Project); además con especialización en manejo de indicadores y KPI’s por la Universidad Nacional de Ingeniería en la ciudad de Lima</p>
-                    </div>
+                    </th:block>
                   </section>
                   <section id="faq">
-                    <article class="course-faq">
-                      <h4>¿Qué necesito para aprobar el curso?</h4>
-                      <p>Debes resolver todas las evaluaciones y tener un promedio mayor a 13 antes de que pasen 30 días de iniciar el curso.</p>
-                    </article>
-                    <article class="course-faq">
-                      <h4>¿Para qué me sirve el certificado?</h4>
-                      <p>Lo más importante va a ser todo lo que aprenderás. El certificado a nombre de Zegel Ipae será la evidencia de que haz desarrollado nuevas capacidades.</p>
+                    <article th:each="pregunta: ${programa.preguntas}" class="course-faq">
+                      <h4 th:text="${pregunta.pregunta.pregunta_pregunta}">¿Qué necesito para aprobar el curso?</h4>
+                      <p th:text="${pregunta.pregunta.respuesta_pregunta}">Debes resolver todas las evaluaciones y tener un promedio mayor a 13 antes de que pasen 30 días de iniciar el curso.</p>
                     </article>
                   </section>
                 </div>

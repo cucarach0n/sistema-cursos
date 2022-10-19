@@ -46,4 +46,7 @@ public class Curso {
 
     @OneToMany(mappedBy ="curso", fetch = FetchType.LAZY)
     private List<Curso_pregunta> preguntas;
+
+    @OneToMany(mappedBy ="curso", fetch = FetchType.LAZY)
+    private List<Docente_curso> docentesCursos;
 }

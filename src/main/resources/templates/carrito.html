@@ -48,7 +48,7 @@
             </a>
           </li>
           <li>
-            <a href="carrito.html">
+            <a th:href="@{/carrito}">
               Cesta de la compra
             </a>
           </li>
@@ -92,7 +92,15 @@
           </tr>
           <tr th:each="servicio:${carrito.servicios}">
             <td class="cart-table__item">
-              <a href="course.html">
+              <a th:if="${servicio.tipoServicio == 1}" th:href="@{/curso(id=${servicio.id_servicio})}">
+                <img style="width:92px;height:66px;" th:src="${servicio.fotoServicio}" alt="">
+                <p th:text="${servicio.nombreServicio}">Excel Intermedio</p>
+              </a>
+              <a th:if="${servicio.tipoServicio == 2}" th:href="@{/membresia(id=${servicio.id_servicio})}">
+                <img style="width:92px;height:66px;" th:src="${servicio.fotoServicio}" alt="">
+                <p th:text="${servicio.nombreServicio}">Excel Intermedio</p>
+              </a>
+              <a th:if="${servicio.tipoServicio == 3}" th:href="@{/programa(id=${servicio.id_servicio})}">
                 <img style="width:92px;height:66px;" th:src="${servicio.fotoServicio}" alt="">
                 <p th:text="${servicio.nombreServicio}">Excel Intermedio</p>
               </a>
@@ -103,7 +111,7 @@
               </a>
             </td>
             <td class="cart-table__total">
-              <p th:text="'S/ '+${#numbers.formatDecimal(servicio.precioFinalServicio, 0,0)} + '.00'">S/. 279.00</p>
+              <p th:text="'S/ '+${#numbers.formatDecimal(servicio.precioFinalServicio, 1, 'COMMA', 1, 'POINT')} + '0'">S/. 279.00</p>
             </td>
           </tr>
         </tbody>
@@ -111,15 +119,15 @@
 
       <p class="cart-total subtotal">
         <span>Subtotal</span>
-        <span th:text="'S/ '+${#numbers.formatDecimal(carrito.monto_total_carrito, 0,0)} + '.00'">S/. 279.00</span>
+        <span th:text="'S/ '+${#numbers.formatDecimal(carrito.monto_total_carrito, 1, 'COMMA', 1, 'POINT')} + '0'">S/. 279.00</span>
       </p>
       <p class="cart-total per-off">
         <span>15% OFF</span>
-        <span th:text="'S/ '+${#numbers.formatDecimal(carrito.dsco_carrito, 0,0)} + '.00'">-S/. 42.00</span>
+        <span th:text="'S/ '+${#numbers.formatDecimal(carrito.dsco_carrito, 1, 'COMMA', 1, 'POINT')} + '0'">-S/. 42.00</span>
       </p>
       <p class="cart-total total">
         <span>Total</span>
-        <span th:text="'S/ '+${#numbers.formatDecimal(carrito.monto_total_carrito, 0,0)} + '.00'">S/. 237.00</span>
+        <span th:text="'S/ '+${#numbers.formatDecimal(carrito.monto_total_carrito, 1, 'COMMA', 1, 'POINT')} + '0'">S/. 237.00</span>
       </p>
 
       <div style="text-align: right; margin-top: 15px; margin-bottom: 40px;">

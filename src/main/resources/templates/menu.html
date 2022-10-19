@@ -260,7 +260,7 @@
               <img style="width:92px;height:66px;" th:src="${servicio.fotoServicio}"  alt="" class="cart-item__img">
               <div class="cart-item__body">
                 <h3 th:text="${servicio.nombreServicio}">Excel Básico</h3>
-                <div class="price" th:text="'S/. '+${#numbers.formatDecimal(servicio.precioServicio, 0,0)}">S/. 279.00</div>
+                <div class="price" th:text="'S/. '+${#numbers.formatDecimal(servicio.precioServicio, 1, 'COMMA', 1, 'POINT')}">S/. 279.00</div>
                 <a href="#" th:onclick="|eliminarItem(${servicio.id_servicio},event,this)|" class="cart-item__delete">
                   <i class="fa fa-trash-alt"></i>
                 </a>
@@ -272,11 +272,11 @@
             <div class="l-cart-modal__prices">
               <p>
                 <span>Subtotal</span>
-                <span th:text="'S/. '+${#numbers.formatDecimal(#session.getAttribute('carrito').monto_subtotal_carrito, 0,0)}">S/ 1674.00</span>
+                <span th:text="'S/. '+${#numbers.formatDecimal(#session.getAttribute('carrito').monto_subtotal_carrito, 1, 'COMMA', 1, 'POINT')}">S/ 1674.00</span>
               </p>
               <p>
                 <span>Total</span>
-                <span th:text="'S/. '+${#numbers.formatDecimal(#session.getAttribute('carrito').monto_total_carrito, 0,0)}">S/ 1380.00</span>
+                <span th:text="'S/. '+${#numbers.formatDecimal(#session.getAttribute('carrito').monto_total_carrito, 1, 'COMMA', 1, 'POINT')}">S/ 1380.00</span>
               </p>
             </div>
             <a href="detalle-pago.html" th:href="@{/carrito}" class="cart-btn cart-btn--block">Comprar</a>

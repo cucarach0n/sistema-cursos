@@ -117,7 +117,7 @@
                     <div class="l-courses-layout__main" ><!--th:each="curs,status: ${cursos}"-->
                         <!-- Course -->
                         
-                             <article class="card" th:each="curs,status: ${cursos}" th:with="descuento=${#numbers.formatDecimal(curs.prec_curso, 0,0)} * (${#numbers.formatDecimal(curs.descto_curso, 0,0)} * 0.01)">
+                             <article class="card" th:each="curs,status: ${cursos}" th:with="descuento=${#numbers.formatDecimal(curs.prec_curso, 1, 'COMMA', 1, 'POINT')} * (${#numbers.formatDecimal(curs.descto_curso, 1, 'COMMA', 1, 'POINT')} * 0.01)">
                                 <a class="card__img" th:href="@{/curso(id=${curs.id_curso})}"><!--th:href="@{/course(id=${curs.id_curso})}"-->
                                     <img th:src="${curs.foto_curso}" alt="Imágen">
                                 </a><!-- .card__img -->
@@ -134,8 +134,8 @@
                                         </p>
                                         
                                         <p class="price">
-                                            <span th:text="${'S/ ' + #numbers.formatDecimal(curs.prec_curso , 0,0)}">S/ 279</span>
-                                            <span th:text="${'S/ ' + #numbers.formatDecimal(curs.prec_curso - descuento, 0,0)}">S/ 237</span>
+                                            <span th:text="${'S/ ' + #numbers.formatDecimal(curs.prec_curso , 1, 'COMMA', 1, 'POINT')}">S/ 279</span>
+                                            <span th:text="${'S/ ' + #numbers.formatDecimal(curs.prec_curso - descuento, 1, 'COMMA', 1, 'POINT')}">S/ 237</span>
                                         </p>
                                     </div>
 

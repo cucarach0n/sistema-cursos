@@ -28,7 +28,7 @@ public class Cupon_descuento {
     public String codigo_cupondescuento;
     public int cantidadUso_cupondescuento;
     public Float valorDescuento_cupondescuento;
-    public String tipoDescuento_cupondescuento;
+    public int tipoDescuento_cupondescuento;//1=descuento porcentaje, 2=descuento en soles
     public int act_cupondescuento;
     
 }

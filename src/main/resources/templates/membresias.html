@@ -59,7 +59,7 @@
         </ul>
       </nav>
       <div class="l-grid-page">
-        <article class="card card--program" th:each="membresia: ${membresias}" th:with="descuento=${#numbers.formatDecimal(membresia.prec_membresia, 0,0)} * (${#numbers.formatDecimal(membresia.dscto_membresia, 0,0)} * 0.01)">
+        <article class="card card--program" th:each="membresia: ${membresias}" th:with="descuento=${#numbers.formatDecimal(membresia.prec_membresia, 1, 'COMMA', 1, 'POINT')} * (${#numbers.formatDecimal(membresia.dscto_membresia, 1, 'COMMA', 1, 'POINT')} * 0.01)">
           <a class="card__img" th:href="@{/membresia(id=${membresia.id_membresia})}" ><!--th:href="@{/membership}"-->
             <img th:src="${membresia.foto_membresia}" alt="Imágen">
             <h3 class="card__img-title" th:text="${membresia.nom_membresia}">Membresía Anual</h3>
@@ -73,8 +73,8 @@
               </p>
 
               <p class="price">
-                <span th:text="${'S/ ' + #numbers.formatDecimal(membresia.prec_membresia , 0,0)}">S/ 279</span>
-                <span th:text="${'S/ ' + #numbers.formatDecimal(membresia.prec_membresia - descuento, 0,0)}">S/ 237</span>
+                <span th:text="${'S/ ' + #numbers.formatDecimal(membresia.prec_membresia , 1, 'COMMA', 1, 'POINT')}">S/ 279</span>
+                <span th:text="${'S/ ' + #numbers.formatDecimal(membresia.prec_membresia - descuento, 1, 'COMMA', 1, 'POINT')}">S/ 237</span>
               </p>
             </div>
 

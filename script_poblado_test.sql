@@ -63,5 +63,34 @@ insert into curso_pregunta(id_curso,id_pregunta) values (3,4);
 insert into curso_pregunta(id_curso,id_pregunta) values (4,1);
 insert into curso_pregunta(id_curso,id_pregunta) values (4,2);
 
+insert into programa_pregunta(id_pregunta,id_programa) values(2,1);
+insert into programa_pregunta(id_pregunta,id_programa) values(4,1);
 
+insert into pais(act_pais,foto_pais,nom_pais) values(1,"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Flag_of_Peru.svg/2560px-Flag_of_Peru.svg.png",'Peru');
 
+insert into usuario(act_usuario,contrasena_usuario,correo_usuario,direccion_usuario,fecha_act_usuario,nombre_usuario,telefono_usuario,tipo_usuario_usuario)
+		values(1,"12345678","docente@docente.com","direccion usuario docente",now(),'nombre usuario','telefono usuario',3);-- tipo_usuario_usuario(1=admin,2=cliente,3=docente)
+insert into persona(ape_persona,cel_persona,desc_persona,dni_persona,enabled,foto_persona,nom_persona,verification_code,id_usuario)
+		values("castillo terrones","22223321","Licenciado en Administración por la Universidad Nacional del Callao y Profesional Técnico en Redes y Comunicaciones de Datos por el IST TECSUP, cuenta con estudios de especialización en Microsoft Office (Word, Excel, Power Point, Access, Project);"
+        ,"23212345",1,"https://www.zegelvirtual.com/sites/default/files/styles/docentes/public/docentes/Foto-CV.JPG.webp?itok=-Jyzi7Gu","pedro","asdEsCdaS#WWWsacaasdas",2);
+        
+insert into usuario(act_usuario,contrasena_usuario,correo_usuario,direccion_usuario,fecha_act_usuario,nombre_usuario,telefono_usuario,tipo_usuario_usuario)
+		values(1,"12345678","docente2@docente2.com","direccion usuario docente2",now(),'nombre usuario2','telefono usuario2',3);-- tipo_usuario_usuario(1=admin,2=cliente,3=docente)
+insert into persona(ape_persona,cel_persona,desc_persona,dni_persona,enabled,foto_persona,nom_persona,verification_code,id_usuario)
+		values("garcia perez","22223321","Licenciado en Administración por la Universidad Nacional del Callao y Profesional Técnico en Redes y Comunicaciones de Datos por el IST TECSUP, cuenta con estudios de especialización en Microsoft Office (Word, Excel, Power Point, Access, Project);"
+        ,"23212345",1,"https://www.zegelvirtual.com/sites/default/files/styles/docentes/public/docentes/Foto-CV.JPG.webp?itok=-Jyzi7Gu","alan","asdEsCdaS#WWWsacaasdas",3);
+        
+insert into usuario(act_usuario,contrasena_usuario,correo_usuario,direccion_usuario,fecha_act_usuario,nombre_usuario,telefono_usuario,tipo_usuario_usuario)
+		values(1,"12345678","docente3@docent3e.com","direccion usuario docent3e",now(),'nombre usuario3','telefono usuario',3);-- tipo_usuario_usuario(1=admin,2=cliente,3=docente)
+insert into persona(ape_persona,cel_persona,desc_persona,dni_persona,enabled,foto_persona,nom_persona,verification_code,id_usuario)
+		values("garcia marquez","22223321","Licenciado en Administración por la Universidad Nacional del Callao y Profesional Técnico en Redes y Comunicaciones de Datos por el IST TECSUP, cuenta con estudios de especialización en Microsoft Office (Word, Excel, Power Point, Access, Project);"
+        ,"23212345",1,"https://www.zegelvirtual.com/sites/default/files/styles/docentes/public/docentes/Foto-CV.JPG.webp?itok=-Jyzi7Gu","gabriel","asdEsCdaS#WWWsacaasdas",4);
+
+insert into docente_curso(fecha_reg_docentecurso,id_curso,id_usuario) values(now(),1,2);
+insert into docente_curso(fecha_reg_docentecurso,id_curso,id_usuario) values(now(),1,3);
+insert into docente_curso(fecha_reg_docentecurso,id_curso,id_usuario) values(now(),2,4);
+insert into docente_curso(fecha_reg_docentecurso,id_curso,id_usuario) values(now(),3,3);
+insert into docente_curso(fecha_reg_docentecurso,id_curso,id_usuario) values(now(),4,2);
+
+insert into cupon_descuento(act_cupondescuento,cantidad_uso_cupondescuento,codigo_cupondescuento,desc_cupondescuento,fecha_fin_cupondescuento,fecha_ini_cupondescuento,tipo_descuento_cupondescuento,valor_descuento_cupondescuento)
+		values(1,23,'abcde','descuento',now() + 10,now(),1,15);

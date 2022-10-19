@@ -178,12 +178,14 @@
           <div class="hero-form shadow">
             <div class="hero-form__body">
               <h2 style="line-height: 1; font-size: 25px; text-align: left;">Código descuento</h2>
-              <form action="#" style="display: flex; align-items: stretch;">
+              <form action="validarCupon" method="post" style="display: flex; align-items: stretch;">
                 <div class="material-input material-input--primary" style="margin: 0; flex-grow: 1;">
-                  <input type="text" id="code" autocomplete="off">
+                  <input th:if="${descuento == 0}" type="text" id="code" name="codigoCupon" autocomplete="off" required>
+                  <input th:if="${descuento != 0}" th:value="${carrito.cuponDescuento.codigo_cupondescuento}" disabled class="non-empty" type="text" id="code" name="codigoCupon" autocomplete="off" required>
                   <label for="code">Código</label>
                 </div>
-                <input class="cart-btn" type="submit" value="Validar" style="margin-left: 10px;">
+                <input th:if="${descuento == 0}" class="cart-btn" type="submit" value="Validar" style="margin-left: 10px;">
+                <input th:if="${descuento != 0}" class="cart-btn" type="submit" value="Validar" style="margin-left: 10px;" disabled>
               </form>
             </div>
           </div>
@@ -201,20 +203,18 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <!--<th:block th:if="${carrito.cuponDescuento != null and carrito.cuponDescuento.tipoDescuento_cupondescuento == 1}" th:with="descuento=${#numbers.formatDecimal(carrito.monto_total_carrito, 1, 'COMMA', 1, 'POINT')} * (${#numbers.formatDecimal(carrito.cuponDescuento.valorDescuento_cupondescuento, 1, 'COMMA', 1, 'POINT')} * 0.01)">
+                      <span th:text="${descuento}"><span>
+                    </th:block>
+                    <th:block th:if="${carrito.cuponDescuento != null and carrito.cuponDescuento.tipoDescuento_cupondescuento == 2}" th:with="descuento=${#numbers.formatDecimal(carrito.cuponDescuento.valorDescuento_cupondescuento, 1, 'COMMA', 1, 'POINT')}">
+                      dsa
+                    </th:block>-->
+                    <tr th:each="servicio :${carrito.servicios}">
                       <td>
-                        <p>Excel Básico</p>
+                        <p th:text="${servicio.nombreServicio}">Excel Básico</p>
                       </td>
                       <td>
-                        <p>S/. 279.00</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>Excel Intermedio</p>
-                      </td>
-                      <td>
-                        <p>S/. 279.00</p>
+                        <p th:text="'S/ '+${#numbers.formatDecimal(servicio.precioFinalServicio, 1, 'COMMA', 1, 'POINT')} + '0'">S/. 279.00</p>
                       </td>
                     </tr>
 
@@ -223,16 +223,26 @@
                         <p><strong>Subtotal</strong></p>
                       </td>
                       <td>
-                        <p>S/. 279.00</p>
+                        <p th:text="'S/ '+${#numbers.formatDecimal(carrito.monto_total_carrito, 1, 'COMMA', 1, 'POINT')} + '0'">S/. 279.00</p>
                       </td>
                     </tr>
 
                     <tr>
                       <td>
-                        <p><strong>15% OFF</strong></p>
+                        <p><strong>Cupon</strong></p>
                       </td>
                       <td>
-                        <p><strong  style="color: red; font-size: 18px;">S/. 279.00</strong></p>
+                        <p>
+                          <strong th:text="'S/. '+${#numbers.formatDecimal(descuento, 1, 'COMMA', 1, 'POINT')}" style="color: red; font-size: 18px;" >S/. 01</strong>
+                          <!--<th:block th:if="${carrito.cuponDescuento != null and carrito.cuponDescuento.tipoDescuento_cupondescuento == 1}">
+                            <strong  style="color: red; font-size: 18px;" th:text="'S/.'+ ${#numbers.formatDecimal(descuento, 1, 'COMMA', 1, 'POINT')} +'0'">S/. 0</strong>
+                          </th:block>
+                          <th:block th:if="${carrito.cuponDescuento != null and carrito.cuponDescuento.tipoDescuento_cupondescuento == 2}">
+                            <strong  th:text="'S/.'+ ${#numbers.formatDecimal(descuento, 1, 'COMMA', 1, 'POINT')} +'0'" >S/. 0</strong>
+                          </th:block>
+                          <strong th:if="${carrito.cuponDescuento != null }" th:text="'S/.'+ ${#numbers.formatDecimal(descuento, 1, 'COMMA', 1, 'POINT')} +'0'" >S/. 0</strong>-->
+                        </p>
+                        
                       </td>
                     </tr>
 
@@ -241,7 +251,7 @@
                         <p><strong>Total</strong></p>
                       </td>
                       <td>
-                        <p><strong style="color: #34c759; font-size: 18px;">S/. 279.00</strong></p>
+                        <p><strong style="color: #34c759; font-size: 18px;" th:text="'S/ '+(${#numbers.formatDecimal(carrito.monto_total_carrito - descuento, 1, 'COMMA', 1, 'POINT')}) + '0'">S/. 279.00</strong></p>
                       </td>
                     </tr>
                   </tbody>

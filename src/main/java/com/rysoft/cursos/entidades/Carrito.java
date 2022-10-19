@@ -2,6 +2,8 @@ package com.rysoft.cursos.Entidades;
 
 import java.util.List;
 
+import com.rysoft.cursos.Modelos.Cupon_descuento;
+
 public class Carrito {
     public int id_carrito;
     public String fecha_compra_carrito;
@@ -12,9 +14,9 @@ public class Carrito {
     public Float dsco_carrito;
     public Integer act_carrito;
     public Integer id_usuario;
-    public Integer id_cuponDescuento;
+    public Cupon_descuento cuponDescuento;
     public Integer id_factura;
-    List<ServicioCarrito> servicios;
+    public List<ServicioCarrito> servicios;
     public int getId_carrito() {
         return id_carrito;
     }
@@ -57,11 +59,11 @@ public class Carrito {
     public void setId_usuario(Integer id_usuario) {
         this.id_usuario = id_usuario;
     }
-    public Integer getId_cuponDescuento() {
-        return id_cuponDescuento;
+    public Cupon_descuento getCuponDescuento() {
+        return cuponDescuento;
     }
-    public void setId_cuponDescuento(Integer id_cuponDescuento) {
-        this.id_cuponDescuento = id_cuponDescuento;
+    public void setCuponDescuento(Cupon_descuento cuponDescuento) {
+        this.cuponDescuento = cuponDescuento;
     }
     public Integer getId_factura() {
         return id_factura;
